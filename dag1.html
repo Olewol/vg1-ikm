@@ -13,7 +13,6 @@
     <nav class="sidebar-nav">
       <div class="nav-section-label">Oversikt</div>
       <a href="index.html" class="nav-link"><span class="icon">🏠</span> Startside</a>
-      <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
       <a href="dokumentasjonsmal.html" class="nav-link"><span class="icon">📎</span> Dokumentasjonsmal</a>
       <div class="nav-section-label">Dager</div>
       <a href="dag1.html" class="nav-link active"><span class="icon">📖</span> Dag 1 – Virtualisering</a>
@@ -22,6 +21,7 @@
       <div class="nav-section-label">Ressurser</div>
       <a href="ad-guide.html" class="nav-link"><span class="icon">🖥️</span> AD-guide (DC01)</a>
       <a href="oppslagsverk.html" class="nav-link"><span class="icon">📚</span> Oppslagsverk</a>
+      <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
     </nav>
     <div class="sidebar-footer">VG1 IKM · Teknologiforståelse<br>Basert på IKM01-01 (Udir)</div>
   </aside>
@@ -79,14 +79,15 @@
         <span class="callout-icon">🍎</span>
         <div>
           <strong>Mac med Apple Silicon (M1/M2/M3) – tre alternativer:</strong><br><br>
-          <strong>Alt 1 – UTM (gratis, anbefalt):</strong> Last ned på <a href="https://mac.getutm.app" style="color:var(--teal)">mac.getutm.app</a>. Kjører Ubuntu ARM64. <em>Begrensning: Windows 10/11 (x86) støttes ikke.</em><br><br>
+          <strong>Alt 1 – UTM (gratis, anbefalt):</strong> Last ned på <a href="https://mac.getutm.app" target="_blank" rel="noopener noreferrer" style="color:var(--teal)">mac.getutm.app</a>. Kjører Ubuntu ARM64. <em>Begrensning: Windows 10/11 (x86) støttes ikke.</em><br><br>
           <strong>Alt 2 – Parallels Desktop (~kr 900/år):</strong> Støtter Windows 11 ARM og gir best ytelse. Anbefales kun hvis skolen har lisens.<br><br>
-          <strong>Alt 3 – Lab-PC på skolen:</strong> Stasjonære PC-er i lab har VMware installert. Du kan ikke jobbe hjemme, men kan lese Notion-teorien hjemme.
+          <strong>Alt 3 – Lab-PC på skolen:</strong> Stasjonære PC-er i lab har VMware installert. Du kan ikke jobbe hjemme, men kan lese teorien på nettsiden hjemme.
         </div>
       </div>
 
       <!-- TEORI -->
       <div class="section-header" style="margin-top:44px"><h2>🧠 Teori – Virtualisering</h2><div class="section-line"></div></div>
+      <p style="color:var(--text-dim);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">📚 Les og forstå – ikke noe som skal leveres inn</p>
 
       <p style="color:var(--text-muted);font-size:15px;line-height:1.8;margin-bottom:20px">En <strong style="color:var(--text)">virtuell maskin (VM)</strong> er en programvarebasert datamaskin som kjører inne i en ekte, fysisk datamaskin. Den oppfører seg akkurat som en ekte maskin – med eget operativsystem, egne filer og egne nettverksinnstillinger.</p>
 
@@ -106,6 +107,14 @@
         </table>
       </div>
 
+      <h3 style="font-size:16px;margin:28px 0 8px;color:var(--text)">Hvorfor bruker vi virtuelle maskiner?</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px">
+        <div class="callout info" style="margin:0"><span class="callout-icon">🧪</span><div><strong>Testing</strong><br>Prøv ut ny programvare uten å risikere den ekte maskinen.</div></div>
+        <div class="callout info" style="margin:0"><span class="callout-icon">🖥️</span><div><strong>Serverdrift</strong><br>Kjør mange servere på én fysisk maskin.</div></div>
+        <div class="callout info" style="margin:0"><span class="callout-icon">🎓</span><div><strong>Opplæring</strong><br>Eksperimenter trygt – nullstill med snapshot.</div></div>
+        <div class="callout info" style="margin:0"><span class="callout-icon">🔒</span><div><strong>Sikkerhet</strong><br>Isoler potensielt farlig programvare.</div></div>
+      </div>
+
       <h3 style="font-size:16px;margin:28px 0 12px;color:var(--text)">Type 1 vs. Type 2 hypervisor</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div class="callout info">
@@ -121,8 +130,16 @@
       <h3 style="font-size:16px;margin:28px 0 8px;color:var(--text)">🎧 Lydvennlig oppsummering</h3>
       <div class="callout info"><span class="callout-icon">🎧</span><div>En virtuell maskin er en datamaskin som lever inne i en annen datamaskin. Programvaren som gjør dette mulig kalles en hypervisor. VMware Workstation er en type 2-hypervisor som kjører som et vanlig program. Når du oppretter en VM, lager du en fil på harddisken som oppfører seg som en hel datamaskin. Du kan alltid gå tilbake til en kjent tilstand med snapshot.</div></div>
 
+      <div class="section-header" style="margin-top:36px"><h2>🎥 Videoressurser</h2><div class="section-line"></div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:8px">
+        <a href="https://www.youtube.com/watch?v=FZR0rG3HKIk" target="_blank" rel="noopener noreferrer" style="color:var(--teal);font-size:14px">🎥 Hva er virtualisering? (VMware, engelsk, 3 min)</a>
+        <a href="https://www.youtube.com/results?search_query=vmware+workstation+install+windows+10+vm+beginner" target="_blank" rel="noopener noreferrer" style="color:var(--teal);font-size:14px">🎥 VMware Workstation – Installer din første VM (søkeresultat)</a>
+        <a href="https://www.youtube.com/results?search_query=UTM+mac+apple+silicon+ubuntu+virtual+machine" target="_blank" rel="noopener noreferrer" style="color:var(--teal);font-size:14px">🎥 UTM på Mac – Kom i gang med Ubuntu (søkeresultat)</a>
+      </div>
+
       <!-- OPPGAVER -->
-      <div class="section-header" style="margin-top:44px"><h2>💻 Oppgaver – Dag 1</h2><div class="section-line"></div></div>
+      <div class="section-header task-section-header" style="margin-top:44px"><h2>💻 Oppgaver – Dag 1</h2><div class="section-line"></div></div>
+      <div class="callout warning task-reminder"><span class="callout-icon">📎</span><div>Disse oppgavene skal dokumenteres. Fyll inn svar og skjermbilder i <a href="dokumentasjonsmal.html" style="color:var(--amber);font-weight:600">dokumentasjonsmalen</a>.</div></div>
 
       <div class="callout success" style="margin-bottom:24px">
         <span class="callout-icon">🟢</span>
@@ -175,7 +192,7 @@
         <div>
           <strong>Fordypningsoppgave 1.F – Installer Ubuntu Desktop fra ISO</strong><br>
           For deg som har kontroll på basisoppgavene:<br>
-          Last ned Ubuntu Desktop 22.04 LTS ISO fra <a href="https://ubuntu.com" style="color:var(--teal)">ubuntu.com</a>, opprett ny VM (New → Typical), velg ISO-fil, tildel minst 2 GB RAM og 20 GB disk, fullfør installasjonen, og installer VMware Tools.<br><br>
+          Last ned Ubuntu Desktop 22.04 LTS ISO fra <a href="https://ubuntu.com" target="_blank" rel="noopener noreferrer" style="color:var(--teal)">ubuntu.com</a>, opprett ny VM (New → Typical), velg ISO-fil, tildel minst 2 GB RAM og 20 GB disk, fullfør installasjonen, og installer VMware Tools.<br><br>
           <em>Spørsmål: Hva er VMware Tools og hvorfor anbefales det?</em>
         </div>
       </div>

@@ -13,7 +13,6 @@
     <nav class="sidebar-nav">
       <div class="nav-section-label">Oversikt</div>
       <a href="index.html" class="nav-link"><span class="icon">🏠</span> Startside</a>
-      <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
       <a href="dokumentasjonsmal.html" class="nav-link"><span class="icon">📎</span> Dokumentasjonsmal</a>
       <div class="nav-section-label">Dager</div>
       <a href="dag1.html" class="nav-link"><span class="icon">📖</span> Dag 1 – Virtualisering</a>
@@ -22,6 +21,7 @@
       <div class="nav-section-label">Ressurser</div>
       <a href="ad-guide.html" class="nav-link"><span class="icon">🖥️</span> AD-guide (DC01)</a>
       <a href="oppslagsverk.html" class="nav-link"><span class="icon">📚</span> Oppslagsverk</a>
+      <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
     </nav>
     <div class="sidebar-footer">VG1 IKM · Teknologiforståelse<br>Basert på IKM01-01 (Udir)</div>
   </aside>
@@ -52,6 +52,7 @@
       </div>
 
       <div class="section-header"><h2>🧠 Teori – Brukeradministrasjon</h2><div class="section-line"></div></div>
+      <p style="color:var(--text-dim);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">📚 Les og forstå – ikke noe som skal leveres inn</p>
 
       <div class="callout success"><span class="callout-icon">🔒</span><div><strong>Principle of Least Privilege</strong> – En bruker skal bare ha akkurat den tilgangen de trenger for å gjøre jobben sin. Dette er et grunnleggende sikkerhetsprinsipp i all IT-administrasjon.</div></div>
 
@@ -69,6 +70,18 @@
               <tr><td><strong>Gjest</strong></td><td>Svært begrenset tilgang. Vanligvis deaktivert av sikkerhetsgrunner.</td></tr>
             </tbody>
           </table></div>
+
+          <h4 style="color:var(--text);font-size:13px;font-weight:600;margin:20px 0 10px">Innebygde brukergrupper i Windows</h4>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Gruppe</th><th>Beskrivelse</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Administrators</strong></td><td>Full kontroll over systemet. Kan installere alt og endre alle innstillinger.</td></tr>
+              <tr><td><strong>Users</strong></td><td>Standard brukere. Kan logge inn og bruke installerte programmer.</td></tr>
+              <tr><td><strong>Guests</strong></td><td>Svært begrenset tilgang. Kontoen deaktiveres normalt av sikkerhetsgrunner.</td></tr>
+              <tr><td><strong>Remote Desktop Users</strong></td><td>Kan logge inn via Fjernskrivebord uten å være lokal administrator.</td></tr>
+            </tbody>
+          </table></div>
+
           <div class="code-block" style="margin-top:16px">
             <div class="code-header"><span class="code-lang">PowerShell / CMD</span><button class="copy-btn">Kopier</button></div>
             <pre><span class="kw">net</span> <span class="fn">user</span>                          <span class="cm"># Vis alle brukere</span>
@@ -91,7 +104,34 @@ su - &lt;brukernavn&gt;                  <span class="cm"># Bytt til bruker</spa
         </div>
       </div>
 
-      <div class="section-header" style="margin-top:44px"><h2>💻 Oppgaver – Dag 3</h2><div class="section-line"></div></div>
+      <div class="section-header" style="margin-top:44px"><h2>☁️ Sentral administrasjon – Microsoft Entra ID</h2><div class="section-line"></div></div>
+      <p style="color:var(--text-dim);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">📚 Les og forstå – ikke noe som skal leveres inn</p>
+
+      <div class="callout info" style="margin-bottom:16px"><span class="callout-icon">🔵</span><div><strong>Microsoft Entra ID</strong> (tidligere kalt Azure AD) er Microsofts skybaserte brukeradministrasjonstjeneste. De fleste norske skoler bruker det gjennom Microsoft 365 – det er her du logger inn med @skole-e-postadressen din.</div></div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Begrep</th><th>Forklaring</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tenant</strong></td><td>Organisasjonens Entra ID-instans – skolens «sky-domene»</td></tr>
+          <tr><td><strong>Bruker</strong></td><td>Konto som kan logge inn og bruke ressurser (f.eks. Microsoft 365)</td></tr>
+          <tr><td><strong>Gruppe</strong></td><td>Samling av brukere for felles tilgangsstyring</td></tr>
+          <tr><td><strong>Rolle</strong></td><td>Definerer hva en bruker/gruppe kan administrere (f.eks. Global Administrator)</td></tr>
+          <tr><td><strong>MFA</strong></td><td>Multi-faktor autentisering – ekstra sikkerhetssjekk ved innlogging</td></tr>
+          <tr><td><strong>Conditional Access</strong></td><td>Regler for hvem som kan logge inn fra hvilke enheter og lokasjoner</td></tr>
+          <tr><td><strong>Lisens</strong></td><td>Microsoft 365-lisens kobles til brukerkontoen og gir tilgang til Teams, Word osv.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="section-header" style="margin-top:36px"><h2>🎥 Videoressurser</h2><div class="section-line"></div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:8px">
+        <a href="https://www.youtube.com/results?search_query=windows+local+user+accounts+groups+tutorial" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);text-decoration:none;font-size:13px;font-weight:500;transition:var(--transition)">🎥 Windows – Lokale brukere og grupper forklart</a>
+        <a href="https://www.youtube.com/results?search_query=powershell+net+user+local+user+management" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);text-decoration:none;font-size:13px;font-weight:500;transition:var(--transition)">🎥 PowerShell – Brukeradministrasjon med net user</a>
+        <a href="https://www.youtube.com/results?search_query=ubuntu+linux+create+users+sudo+groups+terminal" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);text-decoration:none;font-size:13px;font-weight:500;transition:var(--transition)">🎥 Ubuntu – Brukere og sudo i terminalen</a>
+        <a href="https://www.youtube.com/results?search_query=active+directory+domain+services+introduction+beginners" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);text-decoration:none;font-size:13px;font-weight:500;transition:var(--transition)">🎥 Active Directory – Introduksjon til domenekontroller</a>
+      </div>
+
+      <div class="section-header task-section-header" style="margin-top:44px"><h2>💻 Oppgaver – Dag 3</h2><div class="section-line"></div></div>
+      <div class="callout warning task-reminder"><span class="callout-icon">📎</span><div>Disse oppgavene skal dokumenteres. Fyll inn svar og skjermbilder i <a href="dokumentasjonsmal.html" style="color:var(--amber);font-weight:600">dokumentasjonsmalen</a>.</div></div>
 
       <div class="callout success"><span class="callout-icon">🟢</span><div><strong>Oppgave 3.1 – Lokale brukere i Windows (GUI)</strong><br>Åpne Datamaskinbehandling → Lokale brukere og grupper → Brukere. Opprett: <code>elev_anna</code> (standard), <code>elev_bjorn</code> (standard), <code>it_admin</code> (legg til i Administrators). Passord: <code>Passord123!</code>. Logg inn som <code>elev_anna</code> og observer begrenset tilgang.</div></div>
 
@@ -120,16 +160,28 @@ exit                                       <span class="cm"># 8. Gå tilbake</sp
 <span class="fn">sudo</span> deluser --remove-home praksis_elev   <span class="cm"># 9. Slett</span></pre>
       </div>
 
-      <div class="callout info" style="margin-top:20px"><span class="callout-icon">🖥️</span><div>
-        <strong>Oppgave 3.4 – Active Directory på Windows Server (DC01)</strong><br>
-        For fullstendig gjennomgang av Active Directory med OUer, brukeropprettelse via GUI og PowerShell, grupper og NTFS-rettigheter – se den dedikerte guiden:<br><br>
-        <a href="ad-guide.html" style="color:var(--teal);font-weight:600">→ Åpne AD-guiden for DC01</a>
+      <div class="callout success" style="margin-top:16px"><span class="callout-icon">🟢</span><div>
+        <strong>Oppgave 3.4 – Delt mappe med tilgangsstyring</strong><br>
+        Bruk brukerne du opprettet i oppgave 3.1 og sett opp en mappe med NTFS-rettigheter.
       </div></div>
+      <ol class="steps" style="margin-top:12px">
+        <li><p>Opprett mappen <code>C:\FellesMappe</code></p></li>
+        <li><p>Høyreklikk mappen → <strong>Egenskaper</strong> → fanen <strong>Sikkerhet</strong></p></li>
+        <li><p>Klikk <strong>Rediger</strong> → <strong>Legg til</strong> → skriv inn <code>it_admin</code> og bekreft<br>
+        Gi <code>it_admin</code>: <strong>Full kontroll</strong></p></li>
+        <li><p>Legg til <code>elev_anna</code> og <code>elev_bjorn</code> på samme måte<br>
+        Gi dem: <strong>Endre</strong> (kan lese og skrive, men ikke endre rettigheter)</p></li>
+        <li><p>Fjern <strong>Alle / Everyone</strong> fra listen hvis den finnes</p></li>
+        <li><p>Klikk <strong>Bruk</strong> og <strong>OK</strong></p></li>
+        <li><p>Logg inn som <code>elev_anna</code> – kan du opprette en fil i <code>C:\FellesMappe</code>?</p></li>
+        <li><p>Logg inn som <code>it_admin</code> – kan du slette filer som <code>elev_anna</code> opprettet?</p></li>
+      </ol>
+      <div class="callout info" style="margin-top:12px"><span class="callout-icon">💡</span><div>NTFS-rettigheter gjelder på filsystemnivå, uavhengig av deling. Det er god praksis å alltid sette NTFS-rettigheter i tillegg til delingsrettigheter for å ha full kontroll over hvem som har tilgang.</div></div>
 
-      <div class="callout info" style="margin-top:16px"><span class="callout-icon">🔵</span><div>
+      <div class="callout info" style="margin-top:20px"><span class="callout-icon">🔵</span><div>
         <strong>Fordypningsoppgave 3.F – Entra ID (interaktiv simulering)</strong><br>
         Se hvordan skybasert brukeradministrasjon fungerer i Microsoft Entra ID – ingen konto nødvendig:<br><br>
-        <a href="https://mslabs.cloudguides.com/guides/AZ-104%20Exam%20Guide%20-%20Microsoft%20Azure%20Administrator%20Exercise%201" target="_blank" style="color:var(--teal);font-weight:600">→ Interaktiv simulering: Manage Entra ID Identities (Microsoft)</a><br><br>
+        <a href="https://mslabs.cloudguides.com/guides/AZ-104%20Exam%20Guide%20-%20Microsoft%20Azure%20Administrator%20Exercise%201" target="_blank" rel="noopener noreferrer" style="color:var(--teal);font-weight:600">→ Interaktiv simulering: Manage Entra ID Identities (Microsoft)</a><br><br>
         Etter simuleringen: Sammenlign det du gjorde i ADUC med det du så i Entra ID. Hva var likt? Hva var annerledes?
       </div></div>
 
@@ -149,6 +201,7 @@ exit                                       <span class="cm"># 8. Gå tilbake</sp
         <li><span class="check-box"></span> Jeg har opprettet lokale brukere i Windows via GUI (3.1)</li>
         <li><span class="check-box"></span> Jeg har administrert brukere via PowerShell (3.2)</li>
         <li><span class="check-box"></span> Jeg har opprettet bruker i Ubuntu via terminalen (3.3)</li>
+        <li><span class="check-box"></span> Jeg har satt NTFS-rettigheter på en delt mappe (3.4)</li>
         <li><span class="check-box"></span> Jeg har jobbet med Active Directory på DC01 (AD-guide)</li>
         <li><span class="check-box"></span> Jeg forstår hva sudo gjør</li>
         <li><span class="check-box"></span> Jeg har fullført refleksjonsoppgaven</li>

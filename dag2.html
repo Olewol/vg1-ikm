@@ -13,7 +13,6 @@
     <nav class="sidebar-nav">
       <div class="nav-section-label">Oversikt</div>
       <a href="index.html" class="nav-link"><span class="icon">🏠</span> Startside</a>
-      <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
       <a href="dokumentasjonsmal.html" class="nav-link"><span class="icon">📎</span> Dokumentasjonsmal</a>
       <div class="nav-section-label">Dager</div>
       <a href="dag1.html" class="nav-link"><span class="icon">📖</span> Dag 1 – Virtualisering</a>
@@ -22,6 +21,7 @@
       <div class="nav-section-label">Ressurser</div>
       <a href="ad-guide.html" class="nav-link"><span class="icon">🖥️</span> AD-guide (DC01)</a>
       <a href="oppslagsverk.html" class="nav-link"><span class="icon">📚</span> Oppslagsverk</a>
+      <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
     </nav>
     <div class="sidebar-footer">VG1 IKM · Teknologiforståelse<br>Basert på IKM01-01 (Udir)</div>
   </aside>
@@ -51,6 +51,7 @@
       </div>
 
       <div class="section-header"><h2>🧠 Teori – Nettverksmodi</h2><div class="section-line"></div></div>
+      <p style="color:var(--text-dim);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">📚 Les og forstå – ikke noe som skal leveres inn</p>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px">
         <div class="callout success"><span class="callout-icon">🔹</span><div><strong>NAT</strong><br>VM deler vertens IP mot internett. Usynlig utenfra. <em>Bruk: trenger internett, ikke synlighet.</em></div></div>
         <div class="callout info"><span class="callout-icon">🔹</span><div><strong>Bridged</strong><br>VM får egen IP på samme nettverk som verten. Synlig for andre. <em>Bruk: separat enhet på nettverket.</em></div></div>
@@ -58,6 +59,17 @@
       </div>
 
       <h3 style="font-size:16px;color:var(--text);margin-bottom:12px">IP-adresser og subnetting</h3>
+      <p style="color:var(--text-muted);font-size:14px;margin-bottom:12px">En IP-adresse er som en postadresse for en datamaskin – fire tall mellom 0 og 255, atskilt med punktum. Private adresseområder brukes internt i nettverk:</p>
+      <div class="table-wrap" style="margin-bottom:16px">
+        <table>
+          <thead><tr><th>Klasse</th><th>Eksempel</th><th>Typisk bruk</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Privat A</strong></td><td><code>10.0.0.0/8</code></td><td>Store bedriftsnettverk</td></tr>
+            <tr><td><strong>Privat B</strong></td><td><code>172.16.0.0/12</code></td><td>Mellomstore nettverk</td></tr>
+            <tr><td><strong>Privat C</strong></td><td><code>192.168.0.0/24</code></td><td>Hjemmebruk og lab</td></tr>
+          </tbody>
+        </table>
+      </div>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Begrep</th><th>Forklaring</th><th>Eksempel</th></tr></thead>
@@ -89,7 +101,15 @@ ping -c 4 8.8.8.8</pre>
 
       <div class="callout info"><span class="callout-icon">🎧</span><div>I VMware har du tre nettverksmodi. NAT gir internettilgang via verten. Bridged gir VM-en egen IP og gjør den synlig på nettverket. Host-only isolerer VM-en – den kan kun snakke med verten. Alle enheter har en IP-adresse. <code>ping</code> tester om to enheter kan kommunisere.</div></div>
 
-      <div class="section-header" style="margin-top:44px"><h2>💻 Oppgaver – Dag 2</h2><div class="section-line"></div></div>
+      <div class="section-header" style="margin-top:36px"><h2>🎥 Videoressurser</h2><div class="section-line"></div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:8px">
+        <a href="https://www.youtube.com/results?search_query=vmware+workstation+network+nat+bridged+host+only+explained" target="_blank" rel="noopener noreferrer" style="color:var(--teal);font-size:14px">🎥 VMware Network Settings – NAT, Bridged og Host-only forklart (søkeresultat)</a>
+        <a href="https://www.youtube.com/results?search_query=ip+adresser+subnetting+forklaring+norsk" target="_blank" rel="noopener noreferrer" style="color:var(--teal);font-size:14px">🎥 IP-adresser og subnetting for begynnere (søkeresultat)</a>
+        <a href="https://www.youtube.com/results?search_query=ping+kommando+windows+nettverkstesting" target="_blank" rel="noopener noreferrer" style="color:var(--teal);font-size:14px">🎥 Ping og nettverksverktøy i Windows (søkeresultat)</a>
+      </div>
+
+      <div class="section-header task-section-header" style="margin-top:44px"><h2>💻 Oppgaver – Dag 2</h2><div class="section-line"></div></div>
+      <div class="callout warning task-reminder"><span class="callout-icon">📎</span><div>Disse oppgavene skal dokumenteres. Fyll inn svar og skjermbilder i <a href="dokumentasjonsmal.html" style="color:var(--amber);font-weight:600">dokumentasjonsmalen</a>.</div></div>
 
       <div class="callout success"><span class="callout-icon">🟢</span><div><strong>Oppgave 2.1 – NAT og internettilgang</strong> (Økt 1 – begge klasser)<br>Mål: Verifisere at VM-en har internettilgang via NAT.</div></div>
 

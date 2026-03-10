@@ -1,0 +1,227 @@
+VM DOKUMENTASJON – VG1 IKM
+Teknologiforståelse | IKM01-01
+════════════════════════════════════════════════════════════
+
+Fyll inn svar og lim inn skjermbilder etter hvert som du fullfører oppgavene.
+Du trenger ikke vente til slutten – dokumenter underveis!
+
+────────────────────────────────────────────────────────────
+PERSONALIA
+────────────────────────────────────────────────────────────
+
+Navn:      _________________________________
+Dato:      _________________________________
+Klasse:    VG1 IKM
+
+
+════════════════════════════════════════════════════════════
+KOMPETANSEMÅL (sett kryss når fullført)
+════════════════════════════════════════════════════════════
+
+[ ]  Jeg har beskrevet, utforsket og konfigurert datanettverk med egne subnett
+[ ]  Jeg har administrert brukerenheter og koblet dem til sentrale administrasjonsplattformer
+
+
+════════════════════════════════════════════════════════════
+DAG 1 – VIRTUALISERING
+════════════════════════════════════════════════════════════
+
+Hva jeg lærte (skriv 3–5 setninger om hva du forstår om virtualisering):
+
+_____________________________________________________________
+_____________________________________________________________
+_____________________________________________________________
+
+
+OPPGAVE 1.1 – Skjermbilde av VM i kjøring
+[Lim inn skjermbilde her]
+
+
+Spørsmål og svar:
+
+Hva er forskjellen mellom vert og gjest?
+Svar: ___________________________________________________
+________________________________________________________
+
+Snapshot – hva er det og hvorfor er det nyttig?
+Svar: ___________________________________________________
+________________________________________________________
+
+RAM for min VM (fra VM Settings):
+Svar: ___________________________________________________
+
+CPU for min VM (fra VM Settings):
+Svar: ___________________________________________________
+
+
+════════════════════════════════════════════════════════════
+DAG 2 – NETTVERK
+════════════════════════════════════════════════════════════
+
+Hva jeg lærte (skriv 3–5 setninger om nettverk i VMware):
+
+_____________________________________________________________
+_____________________________________________________________
+_____________________________________________________________
+
+
+OPPGAVE 2.1 – Nettverksinformasjon (NAT)
+
+IP-adresse (fra ipconfig / ip addr):   ____________________
+Subnettmaske:                          ____________________
+Standard gateway:                      ____________________
+DNS-server:                            ____________________
+
+Skjermbilde av ping 8.8.8.8:
+[Lim inn skjermbilde her]
+
+
+OPPGAVE 2.2 – Host-only nettverk (to VM-er)
+
+IP VM 1:                               ____________________
+IP VM 2:                               ____________________
+
+Hvorfor er det ingen internettilgang med host-only?
+Svar: ___________________________________________________
+________________________________________________________
+
+
+OPPGAVE 2.3 – Statisk IP
+
+Statisk IP Windows (etter endring):    ____________________
+Statisk IP Ubuntu (etter endring):     ____________________
+
+
+════════════════════════════════════════════════════════════
+DAG 3 – BRUKERADMINISTRASJON
+════════════════════════════════════════════════════════════
+
+Hva jeg lærte (skriv 3–5 setninger om brukeradministrasjon):
+
+_____________________________________________________________
+_____________________________________________________________
+_____________________________________________________________
+
+
+OPPGAVE 3.1 – Lokale brukere i Windows (GUI)
+
+Skjermbilde av brukerlisten:
+[Lim inn skjermbilde her]
+
+Skjermbilde av it_admin i Administrators-gruppen:
+[Lim inn skjermbilde her]
+
+Hva skjer når elev_anna prøver å installere et program?
+Svar: ___________________________________________________
+________________________________________________________
+
+
+OPPGAVE 3.2 – PowerShell-brukeradministrasjon
+
+PowerShell-output (kopier terminaltekst her):
+
+---
+[Lim inn terminaloutput]
+---
+
+Hva gjør kommandoen "net user"?
+Svar: ___________________________________________________
+________________________________________________________
+
+
+OPPGAVE 3.3 – Brukere i Ubuntu
+
+Hva inneholder filen /etc/passwd?
+Svar: ___________________________________________________
+________________________________________________________
+
+
+OPPGAVE 3.4 – Delt mappe med tilgangsstyring
+
+Skjermbilde av NTFS-rettigheter på C:\FellesMappe:
+[Lim inn skjermbilde her]
+
+Hvem har tilgang til mappen, og med hvilke rettigheter?
+Svar: ___________________________________________________
+________________________________________________________
+
+Hva skjedde da elev_anna prøvde å opprette en fil i mappen?
+Svar: ___________________________________________________
+________________________________________________________
+
+Hva er forskjellen mellom "Endre" og "Full kontroll" som tilgangsrett?
+Svar: ___________________________________________________
+________________________________________________________
+
+
+ACTIVE DIRECTORY (AD-guide)
+
+Skjermbilde av OU-struktur i ADUC:
+[Lim inn skjermbilde her]
+
+Skjermbilde av GRP-Elever-VG1 med medlemmer:
+[Lim inn skjermbilde her]
+
+Skjermbilde av NTFS-rettigheter på Elever-mappe:
+[Lim inn skjermbilde her]
+
+
+════════════════════════════════════════════════════════════
+AVSLUTTENDE REFLEKSJON
+════════════════════════════════════════════════════════════
+
+Svar på følgende spørsmål (skriv 5–10 setninger totalt):
+
+1. Hva er en virtuell maskin og hvorfor er det nyttig?
+
+Svar: ___________________________________________________
+________________________________________________________
+________________________________________________________
+
+2. Hva er forskjellen mellom NAT og host-only nettverk?
+
+Svar: ___________________________________________________
+________________________________________________________
+________________________________________________________
+
+3. Hva er prinsippet om minste nødvendige privilegium?
+
+Svar: ___________________________________________________
+________________________________________________________
+________________________________________________________
+
+4. Hva er forskjellen på en lokal bruker og en domenbruker?
+
+Svar: ___________________________________________________
+________________________________________________________
+________________________________________________________
+
+5. Hva er Microsoft Entra ID og hva brukes det til?
+
+Svar: ___________________________________________________
+________________________________________________________
+________________________________________________________
+
+
+════════════════════════════════════════════════════════════
+EGENVURDERING (sett kryss)
+════════════════════════════════════════════════════════════
+
+[ ]  Jeg har gjort alle basisoppgavene
+[ ]  Jeg forstår hva jeg har gjort, ikke bare fulgt en oppskrift
+[ ]  Jeg kan knytte det til kompetansemålene
+[ ]  Jeg har dokumentert med skjermbilder og forklaringer
+
+
+Hva er jeg stolt av?
+_______________________________________________________________
+_______________________________________________________________
+
+Hva ville jeg gjort annerledes neste gang?
+_______________________________________________________________
+_______________________________________________________________
+
+
+════════════════════════════════════════════════════════════
+VG1 IKM · Teknologiforståelse · Basert på IKM01-01 (Udir)
+════════════════════════════════════════════════════════════
