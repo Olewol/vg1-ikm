@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dag 3 – Brukeradministrasjon | VG1 IKM</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-tag">VG1 IKM – Teknologiforståelse</div><h1>Virtuelle maskiner & Nettverk</h1></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Oversikt</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span> Startside</a>
+      <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
+      <a href="dokumentasjonsmal.html" class="nav-link"><span class="icon">📎</span> Dokumentasjonsmal</a>
+      <div class="nav-section-label">Dager</div>
+      <a href="dag1.html" class="nav-link"><span class="icon">📖</span> Dag 1 – Virtualisering</a>
+      <a href="dag2.html" class="nav-link"><span class="icon">🌐</span> Dag 2 – Nettverk</a>
+      <a href="dag3.html" class="nav-link active"><span class="icon">👥</span> Dag 3 – Brukeradmin</a>
+      <div class="nav-section-label">Ressurser</div>
+      <a href="ad-guide.html" class="nav-link"><span class="icon">🖥️</span> AD-guide (DC01)</a>
+      <a href="oppslagsverk.html" class="nav-link"><span class="icon">📚</span> Oppslagsverk</a>
+    </nav>
+    <div class="sidebar-footer">VG1 IKM · Teknologiforståelse<br>Basert på IKM01-01 (Udir)</div>
+  </aside>
+  <div class="overlay"></div>
+  <div class="main-content">
+    <div class="mobile-header"><h1>VG1 IKM</h1><button class="hamburger">☰</button></div>
+    <header class="page-hero">
+      <div class="hero-eyebrow">👥 Dag 3</div>
+      <h1>Brukeradministrasjon</h1>
+      <p class="lead">Lokale brukere i Windows og Ubuntu, least privilege, PowerShell, og Active Directory på Windows Server.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">⚠️ <strong>Klasse A:</strong> Økt 2 = Skolehelsetjenesten</div>
+        <div class="hero-meta-item">📌 <strong>Begge:</strong> Økt 1 = opphent 2.2+2.3 først</div>
+      </div>
+    </header>
+    <div class="content-area">
+
+      <div class="section-header"><h2>⏰ Tidsplan</h2><div class="section-line"></div></div>
+      <div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:32px">
+        <div class="schedule-row" style="background:rgba(255,255,255,0.03)">
+          <div class="schedule-time" style="font-weight:700;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em">Tid</div>
+          <div class="schedule-cell" style="font-weight:700;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em">Klasse A</div>
+          <div class="schedule-cell" style="font-weight:700;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em">Klasse B</div>
+        </div>
+        <div class="schedule-row"><div class="schedule-time">09:40–11:10</div><div class="schedule-cell">Opphent 2.2+2.3 → start brukeradmin</div><div class="schedule-cell">Opphent 2.2+2.3 → start brukeradmin</div></div>
+        <div class="schedule-row"><div class="schedule-time">11:10–11:40</div><div class="schedule-cell lunch">🍽 Lunsj</div><div class="schedule-cell lunch">🍽 Lunsj</div></div>
+        <div class="schedule-row"><div class="schedule-time">11:40–13:50</div><div class="schedule-cell warning">⚠️ Skolehelsetjenesten – fullfør oppgaver hjemme</div><div class="schedule-cell">Brukeradmin + avslutning</div></div>
+      </div>
+
+      <div class="section-header"><h2>🧠 Teori – Brukeradministrasjon</h2><div class="section-line"></div></div>
+
+      <div class="callout success"><span class="callout-icon">🔒</span><div><strong>Principle of Least Privilege</strong> – En bruker skal bare ha akkurat den tilgangen de trenger for å gjøre jobben sin. Dette er et grunnleggende sikkerhetsprinsipp i all IT-administrasjon.</div></div>
+
+      <div class="tab-group" style="margin-top:24px">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="win-theory">Windows</button>
+          <button class="tab-btn" data-tab="ubu-theory">Ubuntu Linux</button>
+        </div>
+        <div class="tab-content active" data-tab-content="win-theory">
+          <div class="table-wrap"><table>
+            <thead><tr><th>Brukertype</th><th>Beskrivelse</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Administrator</strong></td><td>Full kontroll. Kan installere programmer og endre systeminnstillinger.</td></tr>
+              <tr><td><strong>Standardbruker</strong></td><td>Kan bruke programmer og endre egne innstillinger, men ikke installere software.</td></tr>
+              <tr><td><strong>Gjest</strong></td><td>Svært begrenset tilgang. Vanligvis deaktivert av sikkerhetsgrunner.</td></tr>
+            </tbody>
+          </table></div>
+          <div class="code-block" style="margin-top:16px">
+            <div class="code-header"><span class="code-lang">PowerShell / CMD</span><button class="copy-btn">Kopier</button></div>
+            <pre><span class="kw">net</span> <span class="fn">user</span>                          <span class="cm"># Vis alle brukere</span>
+<span class="kw">net</span> <span class="fn">user</span> &lt;navn&gt; &lt;passord&gt; /add    <span class="cm"># Opprett bruker</span>
+<span class="kw">net</span> <span class="fn">user</span> &lt;navn&gt; /delete           <span class="cm"># Slett bruker</span>
+<span class="kw">net</span> <span class="fn">localgroup</span> Administrators &lt;bruker&gt; /add  <span class="cm"># Admin-gruppen</span></pre>
+          </div>
+        </div>
+        <div class="tab-content" data-tab-content="ubu-theory">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">Bash</span><button class="copy-btn">Kopier</button></div>
+            <pre><span class="fn">sudo</span> adduser &lt;brukernavn&gt;          <span class="cm"># Opprett bruker</span>
+<span class="fn">sudo</span> deluser --remove-home &lt;navn&gt;  <span class="cm"># Slett med hjemmappe</span>
+<span class="fn">sudo</span> passwd &lt;brukernavn&gt;          <span class="cm"># Endre passord</span>
+<span class="fn">sudo</span> usermod -aG sudo &lt;bruker&gt;   <span class="cm"># Gi sudo-rettigheter</span>
+cat /etc/passwd                    <span class="cm"># Vis alle brukere</span>
+su - &lt;brukernavn&gt;                  <span class="cm"># Bytt til bruker</span></pre>
+          </div>
+          <div class="callout info" style="margin-top:12px"><span class="callout-icon">💡</span><div><code>sudo</code> lar deg utføre enkeltkommandoer med administratorrettigheter uten å være logget inn som root. Tryggere enn å jobbe som root.</div></div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:44px"><h2>💻 Oppgaver – Dag 3</h2><div class="section-line"></div></div>
+
+      <div class="callout success"><span class="callout-icon">🟢</span><div><strong>Oppgave 3.1 – Lokale brukere i Windows (GUI)</strong><br>Åpne Datamaskinbehandling → Lokale brukere og grupper → Brukere. Opprett: <code>elev_anna</code> (standard), <code>elev_bjorn</code> (standard), <code>it_admin</code> (legg til i Administrators). Passord: <code>Passord123!</code>. Logg inn som <code>elev_anna</code> og observer begrenset tilgang.</div></div>
+
+      <div class="callout success" style="margin-top:16px"><span class="callout-icon">🟢</span><div><strong>Oppgave 3.2 – PowerShell-brukeradministrasjon</strong></div></div>
+      <div class="code-block" style="margin-top:12px">
+        <div class="code-header"><span class="code-lang">PowerShell (Kjør som administrator)</span><button class="copy-btn">Kopier</button></div>
+        <pre><span class="kw">net</span> user                                    <span class="cm"># 1. Vis alle brukere</span>
+<span class="kw">net</span> user testbruker Passord123! /add        <span class="cm"># 2. Opprett bruker</span>
+<span class="kw">net</span> user testbruker                         <span class="cm"># 3. Se detaljer</span>
+<span class="kw">net</span> localgroup Users testbruker /add        <span class="cm"># 4. Legg i Users-gruppe</span>
+<span class="kw">net</span> user testbruker /delete                 <span class="cm"># 5. Slett brukeren</span>
+<span class="kw">net</span> user                                    <span class="cm"># 6. Bekreft sletting</span></pre>
+      </div>
+
+      <div class="callout success" style="margin-top:16px"><span class="callout-icon">🟢</span><div><strong>Oppgave 3.3 – Brukere i Ubuntu</strong></div></div>
+      <div class="code-block" style="margin-top:12px">
+        <div class="code-header"><span class="code-lang">Bash</span><button class="copy-btn">Kopier</button></div>
+        <pre><span class="fn">sudo</span> adduser praksis_elev                  <span class="cm"># 1. Opprett bruker</span>
+cat /etc/passwd | grep praksis_elev        <span class="cm"># 2. Verifiser</span>
+<span class="fn">sudo</span> usermod -aG sudo praksis_elev        <span class="cm"># 3. Gi sudo-rettigheter</span>
+groups praksis_elev                        <span class="cm"># 4. Sjekk gruppemedlemskap</span>
+su - praksis_elev                          <span class="cm"># 5. Bytt til bruker</span>
+whoami                                     <span class="cm"># 6. Hvem er jeg?</span>
+<span class="fn">sudo</span> ls /root                             <span class="cm"># 7. Test sudo</span>
+exit                                       <span class="cm"># 8. Gå tilbake</span>
+<span class="fn">sudo</span> deluser --remove-home praksis_elev   <span class="cm"># 9. Slett</span></pre>
+      </div>
+
+      <div class="callout info" style="margin-top:20px"><span class="callout-icon">🖥️</span><div>
+        <strong>Oppgave 3.4 – Active Directory på Windows Server (DC01)</strong><br>
+        For fullstendig gjennomgang av Active Directory med OUer, brukeropprettelse via GUI og PowerShell, grupper og NTFS-rettigheter – se den dedikerte guiden:<br><br>
+        <a href="ad-guide.html" style="color:var(--teal);font-weight:600">→ Åpne AD-guiden for DC01</a>
+      </div></div>
+
+      <div class="callout info" style="margin-top:16px"><span class="callout-icon">🔵</span><div>
+        <strong>Fordypningsoppgave 3.F – Entra ID (interaktiv simulering)</strong><br>
+        Se hvordan skybasert brukeradministrasjon fungerer i Microsoft Entra ID – ingen konto nødvendig:<br><br>
+        <a href="https://mslabs.cloudguides.com/guides/AZ-104%20Exam%20Guide%20-%20Microsoft%20Azure%20Administrator%20Exercise%201" target="_blank" style="color:var(--teal);font-weight:600">→ Interaktiv simulering: Manage Entra ID Identities (Microsoft)</a><br><br>
+        Etter simuleringen: Sammenlign det du gjorde i ADUC med det du så i Entra ID. Hva var likt? Hva var annerledes?
+      </div></div>
+
+      <div class="section-header" style="margin-top:44px"><h2>📊 Avsluttende refleksjon</h2><div class="section-line"></div></div>
+      <p style="color:var(--text-muted);font-size:14px;margin-bottom:16px">Skriv 5–10 setninger der du svarer på:</p>
+      <ol class="steps">
+        <li><p>Hva er en virtuell maskin og hvorfor er det nyttig?</p></li>
+        <li><p>Hva er forskjellen mellom NAT og host-only nettverk?</p></li>
+        <li><p>Hva er prinsippet om minste nødvendige privilegium?</p></li>
+        <li><p>Hva er forskjellen på en lokal bruker og en domenbruker?</p></li>
+        <li><p>Hva er Microsoft Entra ID og hva brukes det til?</p></li>
+      </ol>
+
+      <div class="section-header" style="margin-top:44px"><h2>✅ Sjekkliste Dag 3</h2><div class="section-line"></div></div>
+      <ul class="checklist">
+        <li><span class="check-box"></span> Jeg kan forklare hvorfor brukeradministrasjon er viktig</li>
+        <li><span class="check-box"></span> Jeg har opprettet lokale brukere i Windows via GUI (3.1)</li>
+        <li><span class="check-box"></span> Jeg har administrert brukere via PowerShell (3.2)</li>
+        <li><span class="check-box"></span> Jeg har opprettet bruker i Ubuntu via terminalen (3.3)</li>
+        <li><span class="check-box"></span> Jeg har jobbet med Active Directory på DC01 (AD-guide)</li>
+        <li><span class="check-box"></span> Jeg forstår hva sudo gjør</li>
+        <li><span class="check-box"></span> Jeg har fullført refleksjonsoppgaven</li>
+      </ul>
+      <hr class="divider">
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="dag2.html" style="color:var(--text-muted);text-decoration:none;font-size:13px">← Dag 2</a>
+        <a href="ad-guide.html" style="color:var(--teal);text-decoration:none;font-size:13px;font-weight:600">AD-guide (DC01) →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+</body>
+</html>

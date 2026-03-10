@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kunnskapstest | VG1 IKM</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .question { margin-bottom: 28px; }
+    .question p { font-size:15px;color:var(--text);margin-bottom:12px;font-weight:500; }
+    .reveal-btn { background:var(--card-bg);border:1px solid var(--border);color:var(--text-muted);padding:8px 16px;border-radius:var(--radius-sm);cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:500;transition:var(--transition); }
+    .reveal-btn:hover { color:var(--text);border-color:rgba(255,255,255,.2); }
+    .answer { display:none;margin-top:12px;padding:14px 16px;background:rgba(0,201,167,.06);border:1px solid rgba(0,201,167,.2);border-radius:var(--radius-sm);font-size:14px;color:#5de8cc;line-height:1.65; }
+    .answer.visible { display:block; }
+    .section-pill { display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px; }
+  </style>
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-tag">VG1 IKM – Teknologiforståelse</div><h1>Virtuelle maskiner & Nettverk</h1></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Oversikt</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span> Startside</a>
+      <a href="kunnskapstest.html" class="nav-link active"><span class="icon">🧠</span> Kunnskapstest</a>
+      <a href="dokumentasjonsmal.html" class="nav-link"><span class="icon">📎</span> Dokumentasjonsmal</a>
+      <div class="nav-section-label">Dager</div>
+      <a href="dag1.html" class="nav-link"><span class="icon">📖</span> Dag 1 – Virtualisering</a>
+      <a href="dag2.html" class="nav-link"><span class="icon">🌐</span> Dag 2 – Nettverk</a>
+      <a href="dag3.html" class="nav-link"><span class="icon">👥</span> Dag 3 – Brukeradmin</a>
+      <div class="nav-section-label">Ressurser</div>
+      <a href="ad-guide.html" class="nav-link"><span class="icon">🖥️</span> AD-guide (DC01)</a>
+      <a href="oppslagsverk.html" class="nav-link"><span class="icon">📚</span> Oppslagsverk</a>
+    </nav>
+    <div class="sidebar-footer">VG1 IKM · Teknologiforståelse<br>Basert på IKM01-01 (Udir)</div>
+  </aside>
+  <div class="overlay"></div>
+  <div class="main-content">
+    <div class="mobile-header"><h1>VG1 IKM</h1><button class="hamburger">☰</button></div>
+    <header class="page-hero">
+      <div class="hero-eyebrow">🧠 Avsluttende test</div>
+      <h1>Kunnskapstest – 16 spørsmål</h1>
+      <p class="lead">Svar på spørsmålene, klikk deretter «Vis fasit» for å se svaret. Kan brukes muntlig i plenum, skriftlig eller som Kahoot.</p>
+      <div class="hero-meta"><div class="hero-meta-item">⏱ <strong>10–15 minutter</strong></div></div>
+    </header>
+    <div class="content-area">
+      <div class="callout info"><span class="callout-icon">📌</span><div>Svar med egne ord først, klikk så «Vis fasit» for å sammenligne. Fasiten er ment som et minimum – ditt svar kan gjerne inneholde mer.</div></div>
+
+      <div class="section-header" style="margin-top:36px"><h2>Del 1 – Virtualisering</h2><div class="section-line"></div></div>
+      <div class="question"><p>1. Hva er en virtuell maskin?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">En virtuell maskin er en programvarebasert datamaskin som kjører inne i en fysisk maskin. Den oppfører seg som en ekte maskin med eget OS, egne filer og egne nettverksinnstillinger.</div></div>
+      <div class="question"><p>2. Hva er forskjellen mellom vert (host) og gjest (guest)?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">Verten er den fysiske maskinen som kjører VMware. Gjesten er den virtuelle maskinen som kjører inni verten.</div></div>
+      <div class="question"><p>3. Hva er en hypervisor, og hva er forskjellen mellom type 1 og type 2?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">En hypervisor er programvaren som gjør det mulig å kjøre virtuelle maskiner. Type 1 kjører direkte på maskinvaren (f.eks. VMware ESXi). Type 2 kjører som et vanlig program på et OS (f.eks. VMware Workstation, UTM).</div></div>
+      <div class="question"><p>4. Hva er en snapshot, og når er det nyttig?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">En snapshot er et lagret «fotografi» av VM-ens tilstand på et bestemt tidspunkt. Det er nyttig når man skal teste noe risikabelt, slik at man kan gå tilbake til en kjent god tilstand hvis noe går galt.</div></div>
+
+      <div class="section-header" style="margin-top:36px"><h2>Del 2 – Nettverk</h2><div class="section-line"></div></div>
+      <div class="question"><p>5. Hva er forskjellen mellom NAT, bridged og host-only?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">NAT: VM-en får internettilgang via verten, men er ikke synlig utenfra. Bridged: VM-en får sin egen IP og er synlig for andre enheter på nettverket. Host-only: VM-en er isolert og kan kun kommunisere med verten.</div></div>
+      <div class="question"><p>6. Hva er en IP-adresse og hva brukes den til?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">En IP-adresse er en unik adresse som identifiserer en enhet på et nettverk. Den består av fire tall mellom 0 og 255 atskilt med punktum, f.eks. 192.168.1.10.</div></div>
+      <div class="question"><p>7. Hva er en gateway og hva er DNS?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">Gateway er IP-adressen til ruteren – døren ut av det lokale nettverket. DNS (Domain Name System) oversetter domenenavn som google.com til IP-adresser.</div></div>
+      <div class="question"><p>8. Hva gjør kommandoen <code>ping</code>?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer"><code>ping</code> sender små datapakker til en adresse og måler om de kommer frem og hvor lang tid det tar. Brukes til å teste om en enhet er tilgjengelig på nettverket.</div></div>
+      <div class="question"><p>9. Hva er forskjellen mellom statisk og dynamisk (DHCP) IP-adresse?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">En statisk IP settes manuelt og er alltid den samme. En dynamisk IP tildeles automatisk av en DHCP-server og kan endre seg. Servere bruker som regel statiske IP-er.</div></div>
+
+      <div class="section-header" style="margin-top:36px"><h2>Del 3 – Brukeradministrasjon</h2><div class="section-line"></div></div>
+      <div class="question"><p>10. Hva er «principle of least privilege»?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">Prinsippet om minste nødvendige privilegium sier at en bruker bare skal ha akkurat den tilgangen de trenger for å gjøre jobben sin. Dette reduserer risikoen for misbruk, feil og angrep.</div></div>
+      <div class="question"><p>11. Hva er forskjellen mellom administrator og standardbruker i Windows?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">En administrator har full kontroll og kan installere programmer og endre systeminnstillinger. En standardbruker kan bruke programmer og endre egne innstillinger, men ikke installere software.</div></div>
+      <div class="question"><p>12. Hva er forskjellen mellom lokal bruker og domenbruker?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">En lokal bruker finnes bare på én maskin. En domenbruker administreres sentralt via Active Directory og kan logge inn på alle maskiner i domenet.</div></div>
+      <div class="question"><p>13. Hva gjør <code>sudo</code> i Linux og hvorfor er det tryggere enn root?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer"><code>sudo</code> lar deg utføre enkeltkommandoer med administratorrettigheter uten å være logget inn som root. Det er tryggere fordi du bare eskalerer rettigheter for én kommando, og alle sudo-handlinger logges.</div></div>
+      <div class="question"><p>14. Hva er Microsoft Entra ID og hva brukes det til?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">Microsoft Entra ID (tidligere Azure AD) er Microsofts skybaserte brukeradministrasjonstjeneste. Det brukes til å administrere brukere, grupper og tilganger uten behov for en lokal server. De fleste norske skoler bruker det gjennom Microsoft 365.</div></div>
+
+      <div class="section-header" style="margin-top:36px"><h2>Bonusspørsmål</h2><div class="section-line"></div></div>
+      <div class="question"><p>15. Du har nettverket <code>192.168.10.0/24</code>. Hva er subnettmasken, og hvor mange enheter kan du ha?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">Subnettmasken er 255.255.255.0. /24 betyr 24 bits til nettverksdelen og 8 bits til enhetsadresser: 2^8 = 256 adresser, men 0 (nettverksadresse) og 255 (broadcast) kan ikke brukes, altså <strong>254 brukbare adresser</strong>.</div></div>
+      <div class="question"><p>16. Hvorfor anbefales host-only nettverk når du tester potensielt usikker programvare?</p><button class="reveal-btn" onclick="toggle(this)">Vis fasit</button><div class="answer">Med host-only er VM-en fullstendig isolert fra internett og det eksterne nettverket. Usikker programvare kan ikke kommunisere ut, spre seg til andre maskiner eller laste ned mer kode. Skaden begrenses til den isolerte VM-en.</div></div>
+    </div>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+<script>function toggle(btn) { const ans = btn.nextElementSibling; ans.classList.toggle('visible'); btn.textContent = ans.classList.contains('visible') ? 'Skjul fasit' : 'Vis fasit'; }</script>
+</body>
+</html>

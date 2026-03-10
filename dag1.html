@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dag 1 – Virtualisering | VG1 IKM</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-tag">VG1 IKM – Teknologiforståelse</div><h1>Virtuelle maskiner & Nettverk</h1></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Oversikt</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span> Startside</a>
+      <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
+      <a href="dokumentasjonsmal.html" class="nav-link"><span class="icon">📎</span> Dokumentasjonsmal</a>
+      <div class="nav-section-label">Dager</div>
+      <a href="dag1.html" class="nav-link active"><span class="icon">📖</span> Dag 1 – Virtualisering</a>
+      <a href="dag2.html" class="nav-link"><span class="icon">🌐</span> Dag 2 – Nettverk</a>
+      <a href="dag3.html" class="nav-link"><span class="icon">👥</span> Dag 3 – Brukeradmin</a>
+      <div class="nav-section-label">Ressurser</div>
+      <a href="ad-guide.html" class="nav-link"><span class="icon">🖥️</span> AD-guide (DC01)</a>
+      <a href="oppslagsverk.html" class="nav-link"><span class="icon">📚</span> Oppslagsverk</a>
+    </nav>
+    <div class="sidebar-footer">VG1 IKM · Teknologiforståelse<br>Basert på IKM01-01 (Udir)</div>
+  </aside>
+  <div class="overlay"></div>
+
+  <div class="main-content">
+    <div class="mobile-header"><h1>VG1 IKM</h1><button class="hamburger">☰</button></div>
+
+    <header class="page-hero">
+      <div class="hero-eyebrow">📖 Dag 1 – Klasse A og B</div>
+      <h1>Hva er virtualisering?</h1>
+      <p class="lead">Forstå hva en virtuell maskin er, sett opp VMware og ta din første snapshot. Mac M-chip-guide inkludert.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">⏱ <strong>09:40–13:50</strong></div>
+        <div class="hero-meta-item">🎯 <strong>Klasse A og B</strong> (samme dag)</div>
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- TIDSPLAN -->
+      <div class="section-header"><h2>⏰ Tidsplan</h2><div class="section-line"></div></div>
+      <div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:32px">
+        <div class="schedule-row" style="background:rgba(255,255,255,0.03)">
+          <div class="schedule-time" style="font-weight:700;color:var(--text-muted);padding:10px 16px;font-size:11px;text-transform:uppercase;letter-spacing:.08em">Tid</div>
+          <div class="schedule-cell" style="font-weight:700;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em">Klasse A</div>
+          <div class="schedule-cell" style="font-weight:700;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em">Klasse B</div>
+        </div>
+        <div class="schedule-row"><div class="schedule-time">09:40–10:00</div><div class="schedule-cell">Introduksjonsforelesning (felles)</div><div class="schedule-cell">Introduksjonsforelesning (felles)</div></div>
+        <div class="schedule-row"><div class="schedule-time">10:00–10:50</div><div class="schedule-cell">Teori: Virtualisering</div><div class="schedule-cell">Teori: Virtualisering</div></div>
+        <div class="schedule-row"><div class="schedule-time">10:50–11:10</div><div class="schedule-cell">Oppgave 1.1 – Start VM</div><div class="schedule-cell">Oppgave 1.1 – Start VM</div></div>
+        <div class="schedule-row"><div class="schedule-time">11:10–11:40</div><div class="schedule-cell lunch">🍽 Lunsj</div><div class="schedule-cell lunch">🍽 Lunsj</div></div>
+        <div class="schedule-row"><div class="schedule-time">11:40–12:30</div><div class="schedule-cell">Oppgave 1.2 – Snapshot</div><div class="schedule-cell">Oppgave 1.2 – Snapshot</div></div>
+        <div class="schedule-row"><div class="schedule-time">12:30–13:20</div><div class="schedule-cell">Fordypning 1.F eller repetisjon</div><div class="schedule-cell">Fordypning 1.F eller repetisjon</div></div>
+        <div class="schedule-row"><div class="schedule-time">13:20–13:50</div><div class="schedule-cell">Dokumentasjon og oppsummering</div><div class="schedule-cell">Dokumentasjon og oppsummering</div></div>
+      </div>
+
+      <!-- MAC-GUIDE -->
+      <div class="section-header"><h2>🍎 Mac- og maskinvare-guide</h2><div class="section-line"></div></div>
+      <div class="callout warning"><span class="callout-icon">⚠️</span><div><strong>Les dette FØRST!</strong> Ikke alle maskiner støtter VMware Workstation/Player. Finn din maskin i tabellen under.</div></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Maskin</th><th>Prosessor</th><th>Anbefalt løsning</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Windows-PC</strong></td><td>Intel / AMD</td><td><span class="pill teal">✅ VMware Workstation Player (gratis)</span></td></tr>
+            <tr><td><strong>Mac (før 2020)</strong></td><td>Intel</td><td><span class="pill teal">✅ VMware Fusion Player (gratis for personlig bruk)</span></td></tr>
+            <tr><td><strong>Mac (2020 og nyere)</strong></td><td>Apple M1/M2/M3</td><td><span class="pill amber">⚠️ Se egen seksjon under</span></td></tr>
+            <tr><td><strong>Skole-PC (stasjonær)</strong></td><td>Intel / AMD</td><td><span class="pill teal">✅ VMware allerede installert</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout info" style="margin-top:20px">
+        <span class="callout-icon">🍎</span>
+        <div>
+          <strong>Mac med Apple Silicon (M1/M2/M3) – tre alternativer:</strong><br><br>
+          <strong>Alt 1 – UTM (gratis, anbefalt):</strong> Last ned på <a href="https://mac.getutm.app" style="color:var(--teal)">mac.getutm.app</a>. Kjører Ubuntu ARM64. <em>Begrensning: Windows 10/11 (x86) støttes ikke.</em><br><br>
+          <strong>Alt 2 – Parallels Desktop (~kr 900/år):</strong> Støtter Windows 11 ARM og gir best ytelse. Anbefales kun hvis skolen har lisens.<br><br>
+          <strong>Alt 3 – Lab-PC på skolen:</strong> Stasjonære PC-er i lab har VMware installert. Du kan ikke jobbe hjemme, men kan lese Notion-teorien hjemme.
+        </div>
+      </div>
+
+      <!-- TEORI -->
+      <div class="section-header" style="margin-top:44px"><h2>🧠 Teori – Virtualisering</h2><div class="section-line"></div></div>
+
+      <p style="color:var(--text-muted);font-size:15px;line-height:1.8;margin-bottom:20px">En <strong style="color:var(--text)">virtuell maskin (VM)</strong> er en programvarebasert datamaskin som kjører inne i en ekte, fysisk datamaskin. Den oppfører seg akkurat som en ekte maskin – med eget operativsystem, egne filer og egne nettverksinnstillinger.</p>
+
+      <div class="callout success"><span class="callout-icon">💡</span><div><strong>Huskeregel:</strong> Den fysiske maskinen er som et hus. En virtuell maskin er som en leilighet inni huset – egne rom, egne nøkler, sin egen inngang – men deler selve bygningen.</div></div>
+
+      <div class="table-wrap" style="margin-top:20px">
+        <table>
+          <thead><tr><th>Begrep</th><th>Forklaring</th></tr></thead>
+          <tbody>
+            <tr><td><code>Vert (host)</code></td><td>Den fysiske maskinen som kjører VMware</td></tr>
+            <tr><td><code>Gjest (guest)</code></td><td>Den virtuelle maskinen som kjører inni verten</td></tr>
+            <tr><td><code>Hypervisor</code></td><td>Programvaren som styrer og isolerer VM-ene</td></tr>
+            <tr><td><code>Snapshot</code></td><td>Et «fotografi» av VM-ens tilstand – du kan gå tilbake til dette punktet</td></tr>
+            <tr><td><code>ISO-fil</code></td><td>En digital kopi av en installasjons-CD/DVD – brukes til å installere OS</td></tr>
+            <tr><td><code>VMDK</code></td><td>Filen som fungerer som harddisken til den virtuelle maskinen</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-size:16px;margin:28px 0 12px;color:var(--text)">Type 1 vs. Type 2 hypervisor</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="callout info">
+          <span class="callout-icon">🏢</span>
+          <div><strong>Type 1 – Bare-metal</strong><br>Kjører direkte på maskinvaren. Eksempler: VMware ESXi, Microsoft Hyper-V. <em>Brukes i profesjonelle datasentre.</em></div>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">💻</span>
+          <div><strong>Type 2 – Hosted</strong><br>Kjører som et vanlig program på et eksisterende OS. Eksempler: VMware Workstation, VirtualBox, UTM. <em>Dette er det vi bruker!</em></div>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin:28px 0 8px;color:var(--text)">🎧 Lydvennlig oppsummering</h3>
+      <div class="callout info"><span class="callout-icon">🎧</span><div>En virtuell maskin er en datamaskin som lever inne i en annen datamaskin. Programvaren som gjør dette mulig kalles en hypervisor. VMware Workstation er en type 2-hypervisor som kjører som et vanlig program. Når du oppretter en VM, lager du en fil på harddisken som oppfører seg som en hel datamaskin. Du kan alltid gå tilbake til en kjent tilstand med snapshot.</div></div>
+
+      <!-- OPPGAVER -->
+      <div class="section-header" style="margin-top:44px"><h2>💻 Oppgaver – Dag 1</h2><div class="section-line"></div></div>
+
+      <div class="callout success" style="margin-bottom:24px">
+        <span class="callout-icon">🟢</span>
+        <div><strong>Oppgave 1.1 – Start din første VM</strong> (Basisoppgave)<br>Mål: Installere og starte en forhåndskonfigurert VM i VMware.</div>
+      </div>
+
+      <div class="tab-group">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="vmware">VMware (Windows/Intel Mac)</button>
+          <button class="tab-btn" data-tab="utm">UTM (Mac M1/M2)</button>
+        </div>
+        <div class="tab-content active" data-tab-content="vmware">
+          <ol class="steps">
+            <li><p>Åpne <strong>VMware Workstation/Player</strong></p></li>
+            <li><p>Velg <strong>«Open a Virtual Machine»</strong> og finn filen læreren har delt (.vmx-fil)</p></li>
+            <li><p>Trykk <strong>«Play virtual machine»</strong></p></li>
+            <li><p>Vent til Windows starter opp – logg inn med passordet læreren har gitt</p></li>
+            <li><p>Ta et <strong>skjermbilde</strong> av den kjørende VM-en</p></li>
+          </ol>
+        </div>
+        <div class="tab-content" data-tab-content="utm">
+          <ol class="steps">
+            <li><p>Åpne <strong>UTM</strong></p></li>
+            <li><p>Velg <strong>«Create a New Virtual Machine» → «Virtualize»</strong></p></li>
+            <li><p>Velg <strong>Linux</strong> → last inn Ubuntu ARM ISO</p></li>
+            <li><p>Tildel <strong>2 GB RAM</strong> og <strong>20 GB disk</strong></p></li>
+            <li><p>Start VM-en og følg Ubuntu-installasjonen</p></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="callout warning"><span class="callout-icon">📸</span><div><strong>Krav til dokumentasjon:</strong><br>• Skjermbilde av VM i kjøring<br>• Svar: Hva er forskjellen mellom vert og gjest i ditt oppsett?</div></div>
+
+      <div class="callout success" style="margin:28px 0 16px">
+        <span class="callout-icon">🟢</span>
+        <div><strong>Oppgave 1.2 – Utforsk VMware-grensesnittet</strong> (Basisoppgave)<br>Mål: Lære de viktigste funksjonene – snapshot og hardware-innstillinger.</div>
+      </div>
+
+      <ol class="steps">
+        <li><p>Ta en <strong>Snapshot</strong> av VM-en mens den kjører (VM-menyen → Snapshot → Take Snapshot)</p></li>
+        <li><p>Gjør en liten endring i VM-en (f.eks. endre bakgrunnsbilde)</p></li>
+        <li><p>Gå tilbake til snapshot og sjekk at endringen er borte</p></li>
+        <li><p>Finn ut hvor mye RAM og CPU VM-en din er tildelt (<strong>Settings → Hardware</strong>)</p></li>
+      </ol>
+
+      <div class="callout warning"><span class="callout-icon">📸</span><div><strong>Krav til dokumentasjon:</strong><br>• Forklar med egne ord hva en snapshot er og hvorfor det er nyttig<br>• Skriv ned RAM og CPU-tildeling</div></div>
+
+      <div class="callout info" style="margin-top:28px">
+        <span class="callout-icon">🔵</span>
+        <div>
+          <strong>Fordypningsoppgave 1.F – Installer Ubuntu Desktop fra ISO</strong><br>
+          For deg som har kontroll på basisoppgavene:<br>
+          Last ned Ubuntu Desktop 22.04 LTS ISO fra <a href="https://ubuntu.com" style="color:var(--teal)">ubuntu.com</a>, opprett ny VM (New → Typical), velg ISO-fil, tildel minst 2 GB RAM og 20 GB disk, fullfør installasjonen, og installer VMware Tools.<br><br>
+          <em>Spørsmål: Hva er VMware Tools og hvorfor anbefales det?</em>
+        </div>
+      </div>
+
+      <!-- SJEKKLISTE -->
+      <div class="section-header" style="margin-top:44px"><h2>✅ Sjekkliste Dag 1</h2><div class="section-line"></div></div>
+      <ul class="checklist">
+        <li><span class="check-box"></span> Jeg kan forklare hva en VM er</li>
+        <li><span class="check-box"></span> Jeg kan forklare forskjellen mellom vert og gjest</li>
+        <li><span class="check-box"></span> Jeg har startet en VM i VMware/UTM</li>
+        <li><span class="check-box"></span> Jeg har tatt en snapshot og gått tilbake til den</li>
+        <li><span class="check-box"></span> Jeg har dokumentert arbeidet mitt med skjermbilder</li>
+      </ul>
+
+      <hr class="divider">
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="index.html" style="color:var(--text-muted);text-decoration:none;font-size:13px">← Startside</a>
+        <a href="dag2.html" style="color:var(--teal);text-decoration:none;font-size:13px;font-weight:600">Dag 2 – Nettverk →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+</body>
+</html>

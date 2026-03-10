@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AD-guide – DC01 | VG1 IKM</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-tag">VG1 IKM – Teknologiforståelse</div><h1>Virtuelle maskiner & Nettverk</h1></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Oversikt</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span> Startside</a>
+      <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
+      <a href="dokumentasjonsmal.html" class="nav-link"><span class="icon">📎</span> Dokumentasjonsmal</a>
+      <div class="nav-section-label">Dager</div>
+      <a href="dag1.html" class="nav-link"><span class="icon">📖</span> Dag 1 – Virtualisering</a>
+      <a href="dag2.html" class="nav-link"><span class="icon">🌐</span> Dag 2 – Nettverk</a>
+      <a href="dag3.html" class="nav-link"><span class="icon">👥</span> Dag 3 – Brukeradmin</a>
+      <div class="nav-section-label">Ressurser</div>
+      <a href="ad-guide.html" class="nav-link active"><span class="icon">🖥️</span> AD-guide (DC01)</a>
+      <a href="oppslagsverk.html" class="nav-link"><span class="icon">📚</span> Oppslagsverk</a>
+    </nav>
+    <div class="sidebar-footer">VG1 IKM · Teknologiforståelse<br>Basert på IKM01-01 (Udir)</div>
+  </aside>
+  <div class="overlay"></div>
+  <div class="main-content">
+    <div class="mobile-header"><h1>VG1 IKM</h1><button class="hamburger">☰</button></div>
+    <header class="page-hero">
+      <div class="hero-eyebrow">🖥️ Active Directory – Windows Server 2025</div>
+      <h1>Brukeradmin på DC01</h1>
+      <p class="lead">Opprett OUer, brukere og grupper i Active Directory. Sett NTFS-rettigheter via GUI og PowerShell. Alt skjer isolert i din egen VM.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">🔒 <strong>DC01</strong> – skolelab.local</div>
+        <div class="hero-meta-item">📡 <strong>192.168.10.10</strong> – LAN Segment</div>
+        <div class="hero-meta-item">🔐 <strong>Ingen internett</strong> – isolert fra skolenettet</div>
+      </div>
+    </header>
+    <div class="content-area">
+
+      <div class="callout warning"><span class="callout-icon">🔒</span><div>Alt du gjør i denne guiden skjer <strong>inne i VMware</strong> på din lab-PC. DC01-serveren er ikke koblet til internett og påvirker ingenting utenfor din egen VM.</div></div>
+
+      <div class="section-header" style="margin-top:32px"><h2>Del 0 – Oppsett og begreper</h2><div class="section-line"></div></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Egenskap</th><th>Verdi</th></tr></thead>
+          <tbody>
+            <tr><td>Servernavn</td><td><code>DC01</code></td></tr>
+            <tr><td>IP-adresse</td><td><code>192.168.10.10</code></td></tr>
+            <tr><td>Domene</td><td><code>skolelab.local</code></td></tr>
+            <tr><td>Nettverkstype</td><td>LAN Segment (ingen internett)</td></tr>
+            <tr><td>Operativsystem</td><td>Windows Server 2025</td></tr>
+            <tr><td>Rolle</td><td>Domain Controller (AD DS + DNS)</td></tr>
+            <tr><td>Administrator-passord</td><td><code>Skole2025!</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap" style="margin-top:16px">
+        <table>
+          <thead><tr><th>Begrep</th><th>Forklaring</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Domain</strong></td><td>Logisk fellesskap av brukere og maskiner – her: <code>skolelab.local</code></td></tr>
+            <tr><td><strong>Domain Controller (DC)</strong></td><td>Serveren som kjører AD DS og håndterer autentisering</td></tr>
+            <tr><td><strong>OU (Organizational Unit)</strong></td><td>Mappe-lignende struktur i AD for å organisere objekter</td></tr>
+            <tr><td><strong>ADUC</strong></td><td>Active Directory Users and Computers – det grafiske verktøyet</td></tr>
+            <tr><td><strong>Distinguished Name (DN)</strong></td><td>Unik adresse: <code>CN=Anna,OU=Elever,DC=skolelab,DC=local</code></td></tr>
+            <tr><td><strong>GPO</strong></td><td>Group Policy Object – innstillinger for brukere/maskiner i en OU</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-header" style="margin-top:44px"><h2>Del 1 – Logg inn og åpne ADUC</h2><div class="section-line"></div></div>
+      <ol class="steps">
+        <li><p>Åpne <strong>VMware Workstation</strong> og start VM-en kalt <strong>DC01</strong></p></li>
+        <li><p>Logg inn: Brukernavn <code>Administrator</code> (eller <code>SKOLELAB\Administrator</code>), Passord: <code>Skole2025!</code></p></li>
+        <li><p>Åpne ADUC via <strong>Server Manager → Tools → Active Directory Users and Computers</strong> <em>eller</em> <code>Win+R</code> → <code>dsa.msc</code></p></li>
+      </ol>
+
+      <div class="section-header" style="margin-top:44px"><h2>Del 2 – Opprett OU-struktur</h2><div class="section-line"></div></div>
+      <p style="color:var(--text-muted);font-size:14px;margin-bottom:16px">Vi bygger denne strukturen:</p>
+      <div class="code-block"><div class="code-header"><span class="code-lang">Struktur</span></div>
+      <pre>skolelab.local
+├── Elever
+│   ├── VG1
+│   └── VG2
+├── Ansatte
+│   ├── Larere
+│   └── IT-admins
+└── Grupper</pre></div>
+
+      <div class="tab-group">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="ou-gui">GUI (ADUC)</button>
+          <button class="tab-btn" data-tab="ou-ps">PowerShell</button>
+        </div>
+        <div class="tab-content active" data-tab-content="ou-gui">
+          <ol class="steps">
+            <li><p>Høyreklikk <code>skolelab.local</code> → <strong>New → Organizational Unit</strong></p></li>
+            <li><p>Navn: <code>Elever</code> – la «Protect from accidental deletion» være huket av ✅ – klikk OK</p></li>
+            <li><p>Gjenta for <code>Ansatte</code> og <code>Grupper</code></p></li>
+            <li><p>Høyreklikk <code>Elever</code> → New → OU → <code>VG1</code>, gjenta for <code>VG2</code></p></li>
+            <li><p>Høyreklikk <code>Ansatte</code> → New → OU → <code>Larere</code> og <code>IT-admins</code></p></li>
+          </ol>
+        </div>
+        <div class="tab-content" data-tab-content="ou-ps">
+          <div class="code-block"><div class="code-header"><span class="code-lang">PowerShell (Administrator)</span><button class="copy-btn">Kopier</button></div>
+          <pre><span class="cm"># Hoved-OUer</span>
+<span class="fn">New-ADOrganizationalUnit</span> <span class="va">-Name</span> <span class="st">"Elever"</span> <span class="va">-Path</span> <span class="st">"DC=skolelab,DC=local"</span>
+<span class="fn">New-ADOrganizationalUnit</span> <span class="va">-Name</span> <span class="st">"Ansatte"</span> <span class="va">-Path</span> <span class="st">"DC=skolelab,DC=local"</span>
+<span class="fn">New-ADOrganizationalUnit</span> <span class="va">-Name</span> <span class="st">"Grupper"</span> <span class="va">-Path</span> <span class="st">"DC=skolelab,DC=local"</span>
+
+<span class="cm"># Under-OUer</span>
+<span class="fn">New-ADOrganizationalUnit</span> <span class="va">-Name</span> <span class="st">"VG1"</span> <span class="va">-Path</span> <span class="st">"OU=Elever,DC=skolelab,DC=local"</span>
+<span class="fn">New-ADOrganizationalUnit</span> <span class="va">-Name</span> <span class="st">"VG2"</span> <span class="va">-Path</span> <span class="st">"OU=Elever,DC=skolelab,DC=local"</span>
+<span class="fn">New-ADOrganizationalUnit</span> <span class="va">-Name</span> <span class="st">"Larere"</span> <span class="va">-Path</span> <span class="st">"OU=Ansatte,DC=skolelab,DC=local"</span>
+<span class="fn">New-ADOrganizationalUnit</span> <span class="va">-Name</span> <span class="st">"IT-admins"</span> <span class="va">-Path</span> <span class="st">"OU=Ansatte,DC=skolelab,DC=local"</span>
+
+<span class="cm"># Verifiser</span>
+<span class="fn">Get-ADOrganizationalUnit</span> <span class="va">-Filter</span> * | <span class="fn">Select-Object</span> Name, DistinguishedName</pre></div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:44px"><h2>Del 3 – Opprett brukere</h2><div class="section-line"></div></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Navn</th><th>Brukernavn</th><th>OU</th><th>Passord</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Anna Olsen</strong></td><td><code>anna.olsen</code></td><td>Elever/VG1</td><td><code>Skole2025!</code></td></tr>
+          <tr><td><strong>Bjørn Hansen</strong></td><td><code>bjorn.hansen</code></td><td>Elever/VG1</td><td><code>Skole2025!</code></td></tr>
+          <tr><td><strong>Kari Nygaard</strong></td><td><code>kari.nygaard</code></td><td>Ansatte/Larere</td><td><code>Skole2025!</code></td></tr>
+          <tr><td><strong>IT Admin</strong></td><td><code>it.admin</code></td><td>Ansatte/IT-admins</td><td><code>Skole2025!</code></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="tab-group" style="margin-top:16px">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="usr-gui">GUI (ADUC)</button>
+          <button class="tab-btn" data-tab="usr-ps">PowerShell</button>
+        </div>
+        <div class="tab-content active" data-tab-content="usr-gui">
+          <ol class="steps">
+            <li><p>I ADUC: Utvid <code>skolelab.local → Elever → VG1</code></p></li>
+            <li><p>Høyreklikk i høyre panel → <strong>New → User</strong></p></li>
+            <li><p>First name: <code>Anna</code>, Last name: <code>Olsen</code>, User logon name: <code>anna.olsen</code></p></li>
+            <li><p>Passord: <code>Skole2025!</code> – <strong>Fjern haken</strong> ved «User must change password at next logon»</p></li>
+            <li><p>Gjenta for de andre tre brukerne i riktig OU</p></li>
+          </ol>
+        </div>
+        <div class="tab-content" data-tab-content="usr-ps">
+          <div class="code-block"><div class="code-header"><span class="code-lang">PowerShell</span><button class="copy-btn">Kopier</button></div>
+          <pre><span class="va">$passord</span> = <span class="fn">ConvertTo-SecureString</span> <span class="st">"Skole2025!"</span> <span class="va">-AsPlainText</span> <span class="va">-Force</span>
+
+<span class="fn">New-ADUser</span> <span class="va">-Name</span> <span class="st">"Anna Olsen"</span> <span class="va">-GivenName</span> <span class="st">"Anna"</span> <span class="va">-Surname</span> <span class="st">"Olsen"</span> `
+  <span class="va">-SamAccountName</span> <span class="st">"anna.olsen"</span> <span class="va">-UserPrincipalName</span> <span class="st">"anna.olsen@skolelab.local"</span> `
+  <span class="va">-Path</span> <span class="st">"OU=VG1,OU=Elever,DC=skolelab,DC=local"</span> `
+  <span class="va">-AccountPassword</span> <span class="va">$passord</span> <span class="va">-Enabled</span> <span class="va">$true</span> <span class="va">-Department</span> <span class="st">"VG1 IKM"</span>
+
+<span class="fn">New-ADUser</span> <span class="va">-Name</span> <span class="st">"Bjørn Hansen"</span> <span class="va">-GivenName</span> <span class="st">"Bjørn"</span> <span class="va">-Surname</span> <span class="st">"Hansen"</span> `
+  <span class="va">-SamAccountName</span> <span class="st">"bjorn.hansen"</span> <span class="va">-UserPrincipalName</span> <span class="st">"bjorn.hansen@skolelab.local"</span> `
+  <span class="va">-Path</span> <span class="st">"OU=VG1,OU=Elever,DC=skolelab,DC=local"</span> `
+  <span class="va">-AccountPassword</span> <span class="va">$passord</span> <span class="va">-Enabled</span> <span class="va">$true</span> <span class="va">-Department</span> <span class="st">"VG1 IKM"</span>
+
+<span class="fn">New-ADUser</span> <span class="va">-Name</span> <span class="st">"Kari Nygaard"</span> <span class="va">-GivenName</span> <span class="st">"Kari"</span> <span class="va">-Surname</span> <span class="st">"Nygaard"</span> `
+  <span class="va">-SamAccountName</span> <span class="st">"kari.nygaard"</span> <span class="va">-UserPrincipalName</span> <span class="st">"kari.nygaard@skolelab.local"</span> `
+  <span class="va">-Path</span> <span class="st">"OU=Larere,OU=Ansatte,DC=skolelab,DC=local"</span> `
+  <span class="va">-AccountPassword</span> <span class="va">$passord</span> <span class="va">-Enabled</span> <span class="va">$true</span> <span class="va">-Department</span> <span class="st">"Undervisning"</span>
+
+<span class="fn">New-ADUser</span> <span class="va">-Name</span> <span class="st">"IT Admin"</span> <span class="va">-SamAccountName</span> <span class="st">"it.admin"</span> `
+  <span class="va">-UserPrincipalName</span> <span class="st">"it.admin@skolelab.local"</span> `
+  <span class="va">-Path</span> <span class="st">"OU=IT-admins,OU=Ansatte,DC=skolelab,DC=local"</span> `
+  <span class="va">-AccountPassword</span> <span class="va">$passord</span> <span class="va">-Enabled</span> <span class="va">$true</span> <span class="va">-Department</span> <span class="st">"IT-drift"</span>
+
+<span class="cm"># Verifiser</span>
+<span class="fn">Get-ADUser</span> <span class="va">-Filter</span> * <span class="va">-Properties</span> Department | <span class="fn">Select-Object</span> Name, SamAccountName, Department, Enabled</pre></div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:44px"><h2>Del 4 – Grupper og medlemmer</h2><div class="section-line"></div></div>
+
+      <div class="code-block"><div class="code-header"><span class="code-lang">PowerShell</span><button class="copy-btn">Kopier</button></div>
+      <pre><span class="cm"># Opprett grupper</span>
+<span class="fn">New-ADGroup</span> <span class="va">-Name</span> <span class="st">"GRP-Elever-VG1"</span> <span class="va">-GroupScope</span> Global <span class="va">-GroupCategory</span> Security `
+  <span class="va">-Path</span> <span class="st">"OU=Grupper,DC=skolelab,DC=local"</span>
+
+<span class="fn">New-ADGroup</span> <span class="va">-Name</span> <span class="st">"GRP-Larere"</span> <span class="va">-GroupScope</span> Global <span class="va">-GroupCategory</span> Security `
+  <span class="va">-Path</span> <span class="st">"OU=Grupper,DC=skolelab,DC=local"</span>
+
+<span class="fn">New-ADGroup</span> <span class="va">-Name</span> <span class="st">"GRP-IT-admins"</span> <span class="va">-GroupScope</span> Global <span class="va">-GroupCategory</span> Security `
+  <span class="va">-Path</span> <span class="st">"OU=Grupper,DC=skolelab,DC=local"</span>
+
+<span class="cm"># Legg til brukere</span>
+<span class="fn">Add-ADGroupMember</span> <span class="va">-Identity</span> <span class="st">"GRP-Elever-VG1"</span> <span class="va">-Members</span> <span class="st">"anna.olsen"</span>,<span class="st">"bjorn.hansen"</span>
+<span class="fn">Add-ADGroupMember</span> <span class="va">-Identity</span> <span class="st">"GRP-Larere"</span> <span class="va">-Members</span> <span class="st">"kari.nygaard"</span>
+<span class="fn">Add-ADGroupMember</span> <span class="va">-Identity</span> <span class="st">"GRP-IT-admins"</span> <span class="va">-Members</span> <span class="st">"it.admin"</span>
+
+<span class="cm"># Verifiser</span>
+<span class="fn">Get-ADGroupMember</span> <span class="va">-Identity</span> <span class="st">"GRP-Elever-VG1"</span> | <span class="fn">Select-Object</span> Name, SamAccountName</pre></div>
+
+      <div class="section-header" style="margin-top:44px"><h2>Del 5 – NTFS-rettigheter på delt mappe</h2><div class="section-line"></div></div>
+      <div class="callout info"><span class="callout-icon">💡</span><div>GRP-Elever-VG1 får <strong>kun lese</strong> på <code>C:\Delt\Elever</code>. GRP-Larere får <strong>full tilgang</strong> på <code>C:\Delt\Larere</code>. Dette er least privilege i praksis.</div></div>
+
+      <div class="tab-group" style="margin-top:16px">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="ntfs-gui">GUI</button>
+          <button class="tab-btn" data-tab="ntfs-ps">PowerShell</button>
+        </div>
+        <div class="tab-content active" data-tab-content="ntfs-gui">
+          <ol class="steps">
+            <li><p>Åpne File Explorer → <code>C:\</code> → Opprett mappe <code>Delt</code> → inni den: <code>Felles</code>, <code>Larere</code>, <code>Elever</code></p></li>
+            <li><p>Høyreklikk <code>Elever</code> → Properties → fanen <strong>Security</strong> → Edit → Add</p></li>
+            <li><p>Skriv <code>GRP-Elever-VG1</code> → Check Names → OK</p></li>
+            <li><p>Sett: Read & execute ✅ List folder ✅ Read ✅ | Write ❌ Modify ❌ Full control ❌</p></li>
+            <li><p>Gjenta for <code>Larere</code>-mappen, legg til <code>GRP-Larere</code> med <strong>Full control ✅</strong></p></li>
+          </ol>
+        </div>
+        <div class="tab-content" data-tab-content="ntfs-ps">
+          <div class="code-block"><div class="code-header"><span class="code-lang">PowerShell</span><button class="copy-btn">Kopier</button></div>
+          <pre><span class="cm"># Opprett mappestruktur</span>
+<span class="fn">New-Item</span> <span class="va">-ItemType</span> Directory <span class="va">-Path</span> <span class="st">"C:\Delt\Felles"</span> <span class="va">-Force</span>
+<span class="fn">New-Item</span> <span class="va">-ItemType</span> Directory <span class="va">-Path</span> <span class="st">"C:\Delt\Larere"</span> <span class="va">-Force</span>
+<span class="fn">New-Item</span> <span class="va">-ItemType</span> Directory <span class="va">-Path</span> <span class="st">"C:\Delt\Elever"</span> <span class="va">-Force</span>
+
+<span class="cm"># Lesetilgang for elever</span>
+<span class="va">$acl</span> = <span class="fn">Get-Acl</span> <span class="st">"C:\Delt\Elever"</span>
+<span class="va">$regel</span> = <span class="fn">New-Object</span> System.Security.AccessControl.FileSystemAccessRule(
+  <span class="st">"SKOLELAB\GRP-Elever-VG1"</span>, <span class="st">"ReadAndExecute"</span>,
+  <span class="st">"ContainerInherit,ObjectInherit"</span>, <span class="st">"None"</span>, <span class="st">"Allow"</span>)
+<span class="va">$acl</span>.SetAccessRule(<span class="va">$regel</span>)
+<span class="fn">Set-Acl</span> <span class="va">-Path</span> <span class="st">"C:\Delt\Elever"</span> <span class="va">-AclObject</span> <span class="va">$acl</span>
+
+<span class="cm"># Full tilgang for lærere</span>
+<span class="va">$acl2</span> = <span class="fn">Get-Acl</span> <span class="st">"C:\Delt\Larere"</span>
+<span class="va">$regel2</span> = <span class="fn">New-Object</span> System.Security.AccessControl.FileSystemAccessRule(
+  <span class="st">"SKOLELAB\GRP-Larere"</span>, <span class="st">"FullControl"</span>,
+  <span class="st">"ContainerInherit,ObjectInherit"</span>, <span class="st">"None"</span>, <span class="st">"Allow"</span>)
+<span class="va">$acl2</span>.SetAccessRule(<span class="va">$regel2</span>)
+<span class="fn">Set-Acl</span> <span class="va">-Path</span> <span class="st">"C:\Delt\Larere"</span> <span class="va">-AclObject</span> <span class="va">$acl2</span>
+
+<span class="cm"># Verifiser</span>
+(<span class="fn">Get-Acl</span> <span class="st">"C:\Delt\Elever"</span>).Access | <span class="fn">Select-Object</span> IdentityReference, FileSystemRights</pre></div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:44px"><h2>Del 6 – Nyttige administrasjonskommandoer</h2><div class="section-line"></div></div>
+      <div class="code-block"><div class="code-header"><span class="code-lang">PowerShell – Brukeradministrasjon</span><button class="copy-btn">Kopier</button></div>
+      <pre><span class="cm"># Tilbakestill passord</span>
+<span class="fn">Set-ADAccountPassword</span> <span class="va">-Identity</span> <span class="st">"anna.olsen"</span> <span class="va">-Reset</span> `
+  <span class="va">-NewPassword</span> (<span class="fn">ConvertTo-SecureString</span> <span class="st">"NyttPassord2025!"</span> <span class="va">-AsPlainText</span> <span class="va">-Force</span>)
+
+<span class="cm"># Deaktiver / aktiver konto</span>
+<span class="fn">Disable-ADAccount</span> <span class="va">-Identity</span> <span class="st">"bjorn.hansen"</span>
+<span class="fn">Enable-ADAccount</span> <span class="va">-Identity</span> <span class="st">"bjorn.hansen"</span>
+
+<span class="cm"># Finn alle deaktiverte kontoer</span>
+<span class="fn">Search-ADAccount</span> <span class="va">-AccountDisabled</span> | <span class="fn">Select-Object</span> Name, SamAccountName
+
+<span class="cm"># Se alle brukere i en OU</span>
+<span class="fn">Get-ADUser</span> <span class="va">-Filter</span> * <span class="va">-SearchBase</span> <span class="st">"OU=VG1,OU=Elever,DC=skolelab,DC=local"</span> | <span class="fn">Select-Object</span> Name, Enabled
+
+<span class="cm"># Flytt bruker til annen OU</span>
+<span class="fn">Move-ADObject</span> <span class="va">-Identity</span> <span class="st">"CN=Anna Olsen,OU=VG1,OU=Elever,DC=skolelab,DC=local"</span> `
+  <span class="va">-TargetPath</span> <span class="st">"OU=VG2,OU=Elever,DC=skolelab,DC=local"</span></pre></div>
+
+      <div class="section-header" style="margin-top:44px"><h2>Del 7 – Refleksjon</h2><div class="section-line"></div></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th></th><th>Lokal (ingen domene)</th><th>Active Directory</th></tr></thead>
+        <tbody>
+          <tr><td>Brukeren gjelder for</td><td>Kun én maskin</td><td>Hele domenet</td></tr>
+          <tr><td>Administrasjonsverktøy</td><td><code>lusrmgr.msc</code>, <code>net user</code></td><td>ADUC, PowerShell AD-modul</td></tr>
+          <tr><td>Fungerer på alle maskiner</td><td>❌</td><td>✅ (domenepålogging)</td></tr>
+          <tr><td>Krever server</td><td>❌</td><td>✅ (Domain Controller)</td></tr>
+          <tr><td>Sentralisert passordpolitikk</td><td>❌</td><td>✅ GPO</td></tr>
+        </tbody>
+      </table></div>
+
+      <p style="color:var(--text-muted);font-size:14px;margin:16px 0 8px">Svar på i dokumentasjonsmalen:</p>
+      <ol class="steps">
+        <li><p>Hva er forskjellen på en OU og en gruppe i Active Directory?</p></li>
+        <li><p>Hvorfor bør GRP-Elever-VG1 kun ha lesetilgang (ikke Full control)?</p></li>
+        <li><p>Hva skjer med brukerens tilgang hvis vi deaktiverer kontoen i AD?</p></li>
+        <li><p>Forklar hva Distinguished Name (DN) er og hvorfor det brukes i PowerShell.</p></li>
+        <li><p>Når ville du brukt GUI vs. PowerShell? Gi ett eksempel på hver.</p></li>
+      </ol>
+
+      <div class="callout info" style="margin-top:28px"><span class="callout-icon">🚀</span><div>
+        <strong>Ekstraoppgave – Entra ID-simulering</strong><br>
+        For de som er ferdig tidlig: se hvordan skybasert AD fungerer uten å logge inn med skolekonto.<br><br>
+        <a href="https://mslabs.cloudguides.com/guides/AZ-104%20Exam%20Guide%20-%20Microsoft%20Azure%20Administrator%20Exercise%201" target="_blank" style="color:var(--teal);font-weight:600">→ Interaktiv simulering: Manage Entra ID Identities (Microsoft)</a>
+      </div></div>
+
+      <div class="section-header" style="margin-top:44px"><h2>✅ Sjekkliste</h2><div class="section-line"></div></div>
+      <ul class="checklist">
+        <li><span class="check-box"></span> Jeg har logget inn på DC01 og åpnet ADUC</li>
+        <li><span class="check-box"></span> Jeg har opprettet OU-strukturen (Elever/VG1, Elever/VG2, Ansatte/Larere, Ansatte/IT-admins, Grupper)</li>
+        <li><span class="check-box"></span> Jeg har opprettet minst 3 brukere i riktig OU</li>
+        <li><span class="check-box"></span> Jeg har opprettet GRP-Elever-VG1 og lagt til brukere</li>
+        <li><span class="check-box"></span> Jeg har satt NTFS-rettigheter (lese på Elever, full på Larere)</li>
+        <li><span class="check-box"></span> Jeg har prøvd minst én PowerShell-kommando</li>
+        <li><span class="check-box"></span> Jeg har besvart refleksjonsoppgavene</li>
+        <li><span class="check-box"></span> (Ekstra) Jeg har gjennomgått Entra ID-simuleringen</li>
+      </ul>
+      <hr class="divider">
+      <a href="dag3.html" style="color:var(--text-muted);text-decoration:none;font-size:13px">← Dag 3 – Brukeradmin</a>
+    </div>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+</body>
+</html>

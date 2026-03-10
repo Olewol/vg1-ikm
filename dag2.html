@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dag 2 – Nettverk | VG1 IKM</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="site-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-tag">VG1 IKM – Teknologiforståelse</div><h1>Virtuelle maskiner & Nettverk</h1></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Oversikt</div>
+      <a href="index.html" class="nav-link"><span class="icon">🏠</span> Startside</a>
+      <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
+      <a href="dokumentasjonsmal.html" class="nav-link"><span class="icon">📎</span> Dokumentasjonsmal</a>
+      <div class="nav-section-label">Dager</div>
+      <a href="dag1.html" class="nav-link"><span class="icon">📖</span> Dag 1 – Virtualisering</a>
+      <a href="dag2.html" class="nav-link active"><span class="icon">🌐</span> Dag 2 – Nettverk</a>
+      <a href="dag3.html" class="nav-link"><span class="icon">👥</span> Dag 3 – Brukeradmin</a>
+      <div class="nav-section-label">Ressurser</div>
+      <a href="ad-guide.html" class="nav-link"><span class="icon">🖥️</span> AD-guide (DC01)</a>
+      <a href="oppslagsverk.html" class="nav-link"><span class="icon">📚</span> Oppslagsverk</a>
+    </nav>
+    <div class="sidebar-footer">VG1 IKM · Teknologiforståelse<br>Basert på IKM01-01 (Udir)</div>
+  </aside>
+  <div class="overlay"></div>
+  <div class="main-content">
+    <div class="mobile-header"><h1>VG1 IKM</h1><button class="hamburger">☰</button></div>
+    <header class="page-hero">
+      <div class="hero-eyebrow">🌐 Dag 2</div>
+      <h1>Nettverk i virtuelle maskiner</h1>
+      <p class="lead">NAT, Bridged og Host-only. IP-adresser, subnettmaske, gateway, DNS og statisk IP-konfigurasjon.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">⚠️ <strong>Klasse B:</strong> Økt 2 = Skolehelsetjenesten → tas igjen Dag 3 økt 1</div>
+      </div>
+    </header>
+    <div class="content-area">
+
+      <div class="section-header"><h2>⏰ Tidsplan</h2><div class="section-line"></div></div>
+      <div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:32px">
+        <div class="schedule-row" style="background:rgba(255,255,255,0.03)">
+          <div class="schedule-time" style="font-weight:700;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em">Tid</div>
+          <div class="schedule-cell" style="font-weight:700;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em">Klasse A</div>
+          <div class="schedule-cell" style="font-weight:700;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em">Klasse B</div>
+        </div>
+        <div class="schedule-row"><div class="schedule-time">09:40–11:10</div><div class="schedule-cell">Teori + Oppgave 2.1</div><div class="schedule-cell">Teori + Oppgave 2.1</div></div>
+        <div class="schedule-row"><div class="schedule-time">11:10–11:40</div><div class="schedule-cell lunch">🍽 Lunsj</div><div class="schedule-cell lunch">🍽 Lunsj</div></div>
+        <div class="schedule-row"><div class="schedule-time">11:40–13:50</div><div class="schedule-cell">Oppgave 2.2 + 2.3</div><div class="schedule-cell warning">⚠️ Skolehelsetjenesten – oppgave 2.2+2.3 tas på Dag 3 økt 1</div></div>
+      </div>
+
+      <div class="section-header"><h2>🧠 Teori – Nettverksmodi</h2><div class="section-line"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px">
+        <div class="callout success"><span class="callout-icon">🔹</span><div><strong>NAT</strong><br>VM deler vertens IP mot internett. Usynlig utenfra. <em>Bruk: trenger internett, ikke synlighet.</em></div></div>
+        <div class="callout info"><span class="callout-icon">🔹</span><div><strong>Bridged</strong><br>VM får egen IP på samme nettverk som verten. Synlig for andre. <em>Bruk: separat enhet på nettverket.</em></div></div>
+        <div class="callout warning"><span class="callout-icon">🔹</span><div><strong>Host-only</strong><br>VM kan kun kommunisere med vert og andre VM-er. Ingen internett. <em>Bruk: isolert lab-miljø.</em></div></div>
+      </div>
+
+      <h3 style="font-size:16px;color:var(--text);margin-bottom:12px">IP-adresser og subnetting</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Begrep</th><th>Forklaring</th><th>Eksempel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>IP-adresse</strong></td><td>Unik nettverksadresse for en enhet</td><td><code>192.168.1.10</code></td></tr>
+            <tr><td><strong>Subnettmaske</strong></td><td>Angir nettverks- vs. enhetsdelen</td><td><code>255.255.255.0 (/24)</code></td></tr>
+            <tr><td><strong>Gateway</strong></td><td>IP til ruteren – utgangen fra nettverket</td><td><code>192.168.1.1</code></td></tr>
+            <tr><td><strong>DNS</strong></td><td>Oversetter domenenavn til IP-adresser</td><td><code>8.8.8.8</code> (Google)</td></tr>
+            <tr><td><strong>DHCP</strong></td><td>Automatisk IP-tildeling</td><td>Ruteren gir deg IP automatisk</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-size:16px;color:var(--text);margin:28px 0 12px">Ping – nettverkstesting</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">SHELL</span><button class="copy-btn">Kopier</button></div>
+        <pre><span class="cm"># Test internettforbindelse</span>
+ping 8.8.8.8
+
+<span class="cm"># Test lokal gateway</span>
+ping 192.168.1.1
+
+<span class="cm"># Test kommunikasjon mellom VM-er</span>
+ping 192.168.100.20
+
+<span class="cm"># Ubuntu: begrens til 4 pakker</span>
+ping -c 4 8.8.8.8</pre>
+      </div>
+
+      <div class="callout info"><span class="callout-icon">🎧</span><div>I VMware har du tre nettverksmodi. NAT gir internettilgang via verten. Bridged gir VM-en egen IP og gjør den synlig på nettverket. Host-only isolerer VM-en – den kan kun snakke med verten. Alle enheter har en IP-adresse. <code>ping</code> tester om to enheter kan kommunisere.</div></div>
+
+      <div class="section-header" style="margin-top:44px"><h2>💻 Oppgaver – Dag 2</h2><div class="section-line"></div></div>
+
+      <div class="callout success"><span class="callout-icon">🟢</span><div><strong>Oppgave 2.1 – NAT og internettilgang</strong> (Økt 1 – begge klasser)<br>Mål: Verifisere at VM-en har internettilgang via NAT.</div></div>
+
+      <div class="tab-group" style="margin-top:16px">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="win21">Windows 10/11</button>
+          <button class="tab-btn" data-tab="ubu21">Ubuntu Desktop</button>
+        </div>
+        <div class="tab-content active" data-tab-content="win21">
+          <ol class="steps">
+            <li><p>Åpne <strong>Ledetekst (CMD) eller PowerShell</strong> i VM-en</p></li>
+            <li><p>Kjør: <code>ipconfig</code> – noter IP-adresse, subnettmaske og gateway</p></li>
+            <li><p>Kjør: <code>ping 8.8.8.8</code> – sjekk at du får svar</p></li>
+            <li><p>Kjør: <code>ping google.com</code> – sjekk at DNS fungerer</p></li>
+            <li><p>Åpne nettleseren og besøk en nettside</p></li>
+          </ol>
+        </div>
+        <div class="tab-content" data-tab-content="ubu21">
+          <ol class="steps">
+            <li><p>Åpne <strong>Terminal</strong> (<code>Ctrl+Alt+T</code>)</p></li>
+            <li><p>Kjør: <code>ip addr</code> – finn IP-adressen</p></li>
+            <li><p>Kjør: <code>ping -c 4 8.8.8.8</code></p></li>
+            <li><p>Kjør: <code>ping -c 4 google.com</code></p></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="callout warning"><span class="callout-icon">📸</span><div><strong>Krav:</strong> Skjermbilde av ipconfig/ip addr output · Skjermbilde av vellykket ping · Tegn en enkel skisse: VM → VMware NAT → Vertsmaskin → Internett</div></div>
+
+      <div class="callout success" style="margin-top:28px"><span class="callout-icon">🟢</span><div><strong>Oppgave 2.2 – Host-only nettverk</strong> (Økt 2 / Klasse B: Dag 3 økt 1)<br>Mål: Opprette isolert nettverk mellom to VM-er. Krever to kjørende VM-er.</div></div>
+      <ol class="steps" style="margin-top:12px">
+        <li><p>Sett begge VM-ene til <strong>Host-only</strong> (VM Settings → Network Adapter → Host-only)</p></li>
+        <li><p>Start begge VM-ene</p></li>
+        <li><p>Sjekk IP-adressene: Windows: <code>ipconfig</code> | Ubuntu: <code>ip addr</code></p></li>
+        <li><p>Ping fra VM 1 til VM 2, og fra VM 2 til VM 1</p></li>
+      </ol>
+      <div class="callout warning"><span class="callout-icon">📸</span><div><strong>Krav:</strong> Skjermbilder av begge IP-adresser · Ping vellykket i begge retninger · Forklar: Hvorfor har VM-ene ikke internettilgang nå?</div></div>
+
+      <div class="callout success" style="margin-top:28px"><span class="callout-icon">🟢</span><div><strong>Oppgave 2.3 – Statisk IP-adresse</strong> (Økt 2 / Klasse B: Dag 3 økt 1)<br>Mål: Sette en statisk (fast) IP-adresse manuelt.</div></div>
+
+      <div class="tab-group" style="margin-top:12px">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="win23">Windows 10/11</button>
+          <button class="tab-btn" data-tab="ubu23">Ubuntu Desktop</button>
+        </div>
+        <div class="tab-content active" data-tab-content="win23">
+          <ol class="steps">
+            <li><p>Høyreklikk nettverksikonet → Åpne nettverksinnstillinger</p></li>
+            <li><p>Ethernet-adapteret → Egenskaper → <strong>Internet Protocol Version 4 (TCP/IPv4)</strong></p></li>
+            <li><p>Velg «Bruk følgende IP-adresse»:<br>IP: <code>192.168.100.10</code> · Maske: <code>255.255.255.0</code> · Gateway: <code>192.168.100.1</code></p></li>
+            <li><p>Klikk OK og verifiser med <code>ipconfig</code></p></li>
+          </ol>
+        </div>
+        <div class="tab-content" data-tab-content="ubu23">
+          <ol class="steps">
+            <li><p>Klikk nettverksikonet → Wired Settings → tannhjulikonet</p></li>
+            <li><p>IPv4-fanen → bytt fra <strong>Automatic (DHCP)</strong> til <strong>Manual</strong></p></li>
+            <li><p>Fyll inn:<br>Address: <code>192.168.100.20</code> · Netmask: <code>255.255.255.0</code> · Gateway: <code>192.168.100.1</code></p></li>
+            <li><p>Klikk Apply og verifiser med <code>ip addr</code></p></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="callout info" style="margin-top:20px"><span class="callout-icon">🔵</span><div><strong>Fordypningsoppgave 2.F – Subnetting</strong><br>Du har nettverket <code>192.168.50.0/24</code>. Del det i 4 like store subnett. For hvert subnett: hva er subnettmasken, nettverksadresse, første og siste brukbare adresse, og broadcast-adresse?</div></div>
+
+      <div class="section-header" style="margin-top:44px"><h2>✅ Sjekkliste Dag 2</h2><div class="section-line"></div></div>
+      <ul class="checklist">
+        <li><span class="check-box"></span> Jeg kan forklare de tre nettverksmodiene i VMware</li>
+        <li><span class="check-box"></span> Jeg vet hva en IP-adresse og subnettmaske er</li>
+        <li><span class="check-box"></span> Jeg har konfigurert NAT og testet internettilgang (2.1)</li>
+        <li><span class="check-box"></span> Jeg har satt opp host-only og kommunisert mellom to VM-er (2.2)</li>
+        <li><span class="check-box"></span> Jeg har satt en statisk IP-adresse (2.3)</li>
+        <li><span class="check-box"></span> (Klasse B: 2.2 og 2.3 gjøres på Dag 3 økt 1)</li>
+      </ul>
+      <hr class="divider">
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="dag1.html" style="color:var(--text-muted);text-decoration:none;font-size:13px">← Dag 1</a>
+        <a href="dag3.html" style="color:var(--teal);text-decoration:none;font-size:13px;font-weight:600">Dag 3 – Brukeradmin →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+</body>
+</html>
