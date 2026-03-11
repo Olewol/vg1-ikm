@@ -85,6 +85,60 @@
         </div>
       </div>
 
+      <!-- LAG EGEN VM FRA SCRATCH -->
+      <div class="section-header" style="margin-top:44px"><h2>🛠️ Lag din egen VM med Windows 11</h2><div class="section-line"></div></div>
+      <div class="callout info"><span class="callout-icon">📁</span><div><strong>Windows 11 ISO-fil</strong> finner du i <strong>Teams</strong> – last den ned til maskinen din før du begynner.</div></div>
+
+      <div class="tab-group" style="margin-top:20px">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="vbox-mac">VirtualBox (Mac)</button>
+          <button class="tab-btn" data-tab="vmware-win">VMware Workstation (Windows)</button>
+          <button class="tab-btn" data-tab="vbox-win">VirtualBox (Windows)</button>
+        </div>
+
+        <!-- VirtualBox Mac -->
+        <div class="tab-content active" data-tab-content="vbox-mac">
+          <div class="callout info" style="margin-bottom:16px"><span class="callout-icon">💡</span><div>Last ned <strong>VirtualBox</strong> gratis fra <a href="https://www.virtualbox.org" target="_blank" rel="noopener noreferrer" style="color:var(--teal)">virtualbox.org</a> – velg macOS-versjonen.</div></div>
+          <ol class="steps">
+            <li><p>Åpne VirtualBox og trykk <strong>«New»</strong></p></li>
+            <li><p>Gi maskinen et navn, f.eks. <code>Windows11-VM</code></p></li>
+            <li><p>Under <strong>ISO Image</strong> – klikk på mappen og velg Windows 11 ISO-filen du lastet ned fra Teams</p></li>
+            <li><p>Kryss av for <strong>«Skip Unattended Installation»</strong> for å installere manuelt</p></li>
+            <li><p>Sett <strong>RAM til minst 4 GB</strong> (4096 MB) og <strong>prosessorer til 2</strong></p></li>
+            <li><p>Sett virtuell disk til <strong>minst 64 GB</strong></p></li>
+            <li><p>Trykk <strong>«Finish»</strong> og deretter <strong>«Start»</strong></p></li>
+            <li><p>Følg Windows 11-installasjonsveiviseren</p></li>
+          </ol>
+        </div>
+
+        <!-- VMware Workstation Windows -->
+        <div class="tab-content" data-tab-content="vmware-win">
+          <div class="callout info" style="margin-bottom:16px"><span class="callout-icon">💡</span><div>VMware Workstation Pro er nå <strong>gratis for personlig bruk</strong>. Last ned fra <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion" target="_blank" rel="noopener noreferrer" style="color:var(--teal)">vmware.com</a>.</div></div>
+          <ol class="steps">
+            <li><p>Åpne VMware Workstation og velg <strong>«Create a New Virtual Machine»</strong></p></li>
+            <li><p>Velg <strong>«Typical (recommended)»</strong> og klikk <em>Next</em></p></li>
+            <li><p>Velg <strong>«Installer disc image file (iso)»</strong>, klikk <em>Browse</em> og finn Windows 11 ISO-filen fra Teams</p></li>
+            <li><p>VMware oppdager automatisk Windows 11 – fyll inn produktnøkkel (kan hoppes over) og velg versjon</p></li>
+            <li><p>Gi VM-en et navn og velg lagringssted</p></li>
+            <li><p>Sett disk til <strong>minst 64 GB</strong></p></li>
+            <li><p>Klikk <em>Finish</em> – VMware starter VM-en og Windows 11 installeres automatisk</p></li>
+          </ol>
+        </div>
+
+        <!-- VirtualBox Windows -->
+        <div class="tab-content" data-tab-content="vbox-win">
+          <div class="callout warning" style="margin-bottom:16px"><span class="callout-icon">⚙️</span><div><strong>Anbefalt konfigurasjon for VirtualBox på Windows</strong> – disse innstillingene gir mye bedre ytelse:</div></div>
+          <ol class="steps">
+            <li><p>Opprett VM-en på samme måte som i Mac-guiden over (velg Windows 11 ISO fra Teams)</p></li>
+            <li><p><strong>Prosessorer:</strong> Sett antall CPU-kjerner til <strong>4</strong> (Settings → System → Processor)</p></li>
+            <li><p><strong>Skjermkort:</strong> Gå til <strong>Settings → Display</strong> og aktiver <strong>«Enable 3D Acceleration»</strong> – sett Video Memory til maks (128 MB)</p></li>
+            <li><p><strong>Virtuell disk:</strong> Gå til <strong>Settings → Storage</strong>, klikk på den virtuelle harddisken, og kryss av for <strong>«Solid-state Drive»</strong></p></li>
+            <li><p>Trykk <strong>OK</strong>, start VM-en og følg Windows 11-installasjonsveiviseren</p></li>
+          </ol>
+          <div class="callout success" style="margin-top:12px"><span class="callout-icon">✅</span><div>Disse tre innstillingene (4 kjerner, 3D-akselerasjon og SSD) gjør at Windows 11 kjører vesentlig raskere i VirtualBox.</div></div>
+        </div>
+      </div>
+
       <!-- TEORI -->
       <div class="section-header" style="margin-top:44px"><h2>🧠 Teori – Virtualisering</h2><div class="section-line"></div></div>
       <p style="color:var(--text-dim);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">📚 Les og forstå – ikke noe som skal leveres inn</p>
@@ -154,7 +208,7 @@
         <div class="tab-content active" data-tab-content="vmware">
           <ol class="steps">
             <li><p>Åpne <strong>VMware Workstation/Player</strong></p></li>
-            <li><p>Velg <strong>«Open a Virtual Machine»</strong> og finn filen læreren har delt (.vmx-fil)</p></li>
+            <li><p>Velg <strong>«Open a Virtual Machine»</strong> og finn filen læreren har delt (<strong>.ova-fil</strong>)</p></li>
             <li><p>Trykk <strong>«Play virtual machine»</strong></p></li>
             <li><p>Vent til Windows starter opp – logg inn med passordet læreren har gitt</p></li>
             <li><p>Ta et <strong>skjermbilde</strong> av den kjørende VM-en</p></li>
