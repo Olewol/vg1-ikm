@@ -173,7 +173,100 @@ ping -c 4 8.8.8.8</pre>
         </div>
       </div>
 
-      <div class="callout info" style="margin-top:20px"><span class="callout-icon">🔵</span><div><strong>Fordypningsoppgave 2.F – Subnetting</strong><br>Du har nettverket <code>192.168.50.0/24</code>. Del det i 4 like store subnett. For hvert subnett: hva er subnettmasken, nettverksadresse, første og siste brukbare adresse, og broadcast-adresse?</div></div>
+      <!-- TIPS OG FEILSØKING -->
+      <div class="section-header" style="margin-top:44px"><h2>💡 Tips og feilsøking</h2><div class="section-line"></div></div>
+
+      <div class="callout warning">
+        <span class="callout-icon">🔥</span>
+        <div>
+          <strong>Ping fungerer ikke – vanlige årsaker:</strong>
+          <ul style="margin:8px 0 0 16px;padding:0">
+            <li>Sjekk at nettverksadapteren i VM-en er satt til <strong>NAT</strong> (ikke Host-only eller Bridged)</li>
+            <li>Windows-brannmuren kan blokkere ping. Test med <code>ping 8.8.8.8</code> – hvis det fungerer, men ikke <code>ping google.com</code>, er det DNS-problemet</li>
+            <li>Prøv å slå av og på nettverksadapteren i VM-en: Nettverksinnstillinger → deaktiver → aktiver adapteren</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout info" style="margin-top:12px">
+        <span class="callout-icon">🌐</span>
+        <div>
+          <strong>Statisk IP – mistet internett?</strong><br>
+          Når du setter statisk IP mister du internett hvis gateway eller DNS mangler. Sjekk:
+          <ul style="margin:8px 0 0 16px;padding:0">
+            <li><strong>Windows:</strong> Gateway og DNS må fylles inn – ikke la dem stå tomme. Bruk <code>8.8.8.8</code> som DNS</li>
+            <li><strong>Ubuntu:</strong> Etter å ha trykket Apply – toggle nettverkstilkoblingen av og på for at innstillingene skal tre i kraft</li>
+            <li>Vil du tilbake til automatisk IP: velg <strong>DHCP</strong> igjen og toggle tilkoblingen</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout info" style="margin-top:12px">
+        <span class="callout-icon">🔗</span>
+        <div>
+          <strong>Host-only – VM-ene finner ikke hverandre?</strong>
+          <ul style="margin:8px 0 0 16px;padding:0">
+            <li>Sjekk at <strong>begge</strong> VM-ene er satt til Host-only – ikke bare én</li>
+            <li>Sjekk IP-adressene med <code>ipconfig</code> / <code>ip addr</code> – begge må være i samme subnett (f.eks. 192.168.56.x)</li>
+            <li>Windows: Brannmuren kan blokkere ping mellom VM-er. Prøv å slå av Windows Defender Firewall midlertidig for å teste</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:44px"><h2>⭐ Bonusoppgaver – Dag 2</h2><div class="section-line"></div></div>
+      <div class="callout info" style="margin-bottom:4px"><span class="callout-icon">ℹ️</span><div>Bonusoppgavene er frivillige og krever at du har gjort 2.1–2.3. De gir dypere forståelse og er bra å ha med i dokumentasjonen.</div></div>
+
+      <div class="callout info" style="margin-top:12px"><span class="callout-icon">🔵</span><div><strong>Fordypningsoppgave 2.F – Subnetting</strong><br>Du har nettverket <code>192.168.50.0/24</code>. Del det i 4 like store subnett. For hvert subnett: hva er subnettmasken, nettverksadresse, første og siste brukbare adresse, og broadcast-adresse?<br><em>Se oppslagsverk → Subnettmaske-tabell for hjelp.</em></div></div>
+
+      <div class="callout info" style="margin-top:12px">
+        <span class="callout-icon">🔵</span>
+        <div>
+          <strong>Bonusoppgave 2.G – Rutetrace: se pakkenes vei</strong><br>
+          Bruk <code>tracert</code> (Windows) eller <code>traceroute</code> (Ubuntu) for å se hvilke rutere pakkene passerer på vei til internett.<br><br>
+          <div class="tab-group" style="margin-top:8px">
+            <div class="tab-bar">
+              <button class="tab-btn active" data-tab="win2g">Windows</button>
+              <button class="tab-btn" data-tab="ubu2g">Ubuntu</button>
+            </div>
+            <div class="tab-content active" data-tab-content="win2g">
+              <div class="code-block" style="margin:8px 0 0">
+                <div class="code-header"><span class="code-lang">CMD / PowerShell</span><button class="copy-btn">Kopier</button></div>
+                <pre>tracert google.com</pre>
+              </div>
+            </div>
+            <div class="tab-content" data-tab-content="ubu2g">
+              <div class="code-block" style="margin:8px 0 0">
+                <div class="code-header"><span class="code-lang">Bash</span><button class="copy-btn">Kopier</button></div>
+                <pre>traceroute google.com</pre>
+              </div>
+            </div>
+          </div>
+          <strong>Svar på:</strong>
+          <ul style="margin:8px 0 0 16px;padding:0">
+            <li>Hvor mange hopp (hops) er det til google.com?</li>
+            <li>Hva er IP-adressen til det første hoppet? (Det er din gateway/ruter)</li>
+            <li>Hva skjer med responstiden (ms) desto lenger unna du kommer?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout info" style="margin-top:12px">
+        <span class="callout-icon">🔵</span>
+        <div>
+          <strong>Bonusoppgave 2.H – Bridged adapter: VM på det ekte nettverket</strong><br>
+          Bytt nettverksmodus til <strong>Bridged</strong> og se hva som endrer seg.<br><br>
+          <ol style="margin:8px 0 0 16px;padding:0">
+            <li>Gå til VM Settings → Network Adapter → sett til <strong>Bridged</strong></li>
+            <li>Restart nettverksadapteren i VM-en (eller restart VM-en)</li>
+            <li>Kjør <code>ipconfig</code> (Windows) / <code>ip addr</code> (Ubuntu) – noter den nye IP-adressen</li>
+            <li>Sammenlign: Er VM-ens IP nå i samme subnett som vertsmaskinens IP?</li>
+            <li>Prøv å pinge vertsmaskinens IP fra VM-en</li>
+            <li>Bytt tilbake til <strong>NAT</strong> når du er ferdig</li>
+          </ol>
+          <br>
+          <strong>Svar på:</strong> Hva er den viktigste forskjellen mellom NAT og Bridged, basert på det du observerte?
+        </div>
+      </div>
 
       <div class="section-header" style="margin-top:44px"><h2>✅ Sjekkliste Dag 2</h2><div class="section-line"></div></div>
       <ul class="checklist">

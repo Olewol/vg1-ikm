@@ -21,6 +21,7 @@
       <a href="ad-guide.html" class="nav-link"><span class="icon">🖥️</span> AD-guide (DC01)</a>
       <a href="oppslagsverk.html" class="nav-link"><span class="icon">📚</span> Oppslagsverk</a>
       <a href="kunnskapstest.html" class="nav-link"><span class="icon">🧠</span> Kunnskapstest</a>
+      <a href="dokumentasjon-punkter.html" class="nav-link"><span class="icon">📋</span> Dokumentasjonspunkter</a>
     </nav>
     <div class="sidebar-footer">VG1 IKM · Teknologiforståelse<br>Basert på IKM01-01 (Udir)</div>
   </aside>
@@ -36,7 +37,7 @@
 
       <div class="callout success"><span class="callout-icon">📓</span><div><strong>Du har fått en kopi i OneNote</strong> – du trenger ikke kopiere denne siden selv.<br>Finn den under: <strong>Eget område → Teknologiforståelse → VM dokumentasjon</strong><br>Fyll inn svar og skjermbilder direkte der.</div></div>
 
-      <div class="callout info" style="margin-top:12px"><span class="callout-icon">📌</span><div>Lim inn skjermbilder og svar etter hvert som du fullfører oppgavene. Du trenger ikke vente til slutten.</div></div>
+      <div class="callout info" style="margin-top:12px"><span class="callout-icon">📌</span><div>Lim inn skjermbilder og svar etter hvert som du fullfører oppgavene. Du trenger ikke vente til slutten. Bonusoppgaver (2.F–2.H og 3.F–3.H) er frivillige – ta dem hvis du er ferdig med basisdelen. <a href="dokumentasjon-punkter.html" style="color:var(--teal);font-weight:600">Se fullstendig oversikt over alle punkter →</a></div></div>
 
       <div class="section-header" style="margin-top:32px"><h2>Personalia</h2><div class="section-line"></div></div>
       <div class="table-wrap"><table><tbody>
@@ -61,6 +62,15 @@
         <tr><td><strong>CPU for min VM</strong></td><td><em>(Fra VM Settings)</em></td></tr>
       </tbody></table></div>
 
+      <p style="color:var(--text-dim);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin:20px 0 8px">Sjekkliste Dag 1</p>
+      <ul class="checklist">
+        <li><span class="check-box"></span> Jeg kan forklare hva en VM er</li>
+        <li><span class="check-box"></span> Jeg kan forklare forskjellen mellom vert og gjest</li>
+        <li><span class="check-box"></span> Jeg har startet en VM i VMware/UTM</li>
+        <li><span class="check-box"></span> Jeg har tatt en snapshot og gått tilbake til den</li>
+        <li><span class="check-box"></span> Jeg har dokumentert arbeidet mitt med skjermbilder</li>
+      </ul>
+
       <div class="section-header" style="margin-top:44px"><h2>🌐 Dag 2 – Nettverk</h2><div class="section-line"></div></div>
       <div class="callout warning"><span class="callout-icon">📝</span><div><strong>Hva jeg lærte:</strong><br><em>(Skriv 3–5 setninger om nettverk i VMware)</em></div></div>
       <div class="table-wrap" style="margin-top:16px"><table><tbody>
@@ -69,22 +79,44 @@
         <tr><td><strong>2.1 – Standard gateway</strong></td><td><em>(Svar)</em></td></tr>
         <tr><td><strong>2.1 – DNS-server</strong></td><td><em>(Svar)</em></td></tr>
         <tr><td><strong>2.1 – Skjermbilde av ping 8.8.8.8</strong></td><td><em>(Lim inn skjermbilde)</em></td></tr>
+        <tr><td><strong>2.1 – Skisse: VM → NAT → Vertsmaskin → Internett</strong></td><td><em>(Lim inn skisse/tegning)</em></td></tr>
         <tr><td><strong>2.2 – IP VM 1</strong></td><td><em>(Svar)</em></td></tr>
         <tr><td><strong>2.2 – IP VM 2</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>2.2 – Skjermbilder av ping mellom VM-ene</strong></td><td><em>(Lim inn skjermbilder)</em></td></tr>
         <tr><td><strong>2.2 – Hvorfor ingen internett med host-only?</strong></td><td><em>(Svar)</em></td></tr>
-        <tr><td><strong>2.3 – Statisk IP Windows (etter)</strong></td><td><em>(Svar)</em></td></tr>
-        <tr><td><strong>2.3 – Statisk IP Ubuntu (etter)</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>2.3 – Statisk IP Windows (verifisert med ipconfig)</strong></td><td><em>(Svar + skjermbilde)</em></td></tr>
+        <tr><td><strong>2.3 – Statisk IP Ubuntu (verifisert med ip addr)</strong></td><td><em>(Svar + skjermbilde)</em></td></tr>
       </tbody></table></div>
+
+      <div class="callout info" style="margin-top:12px"><span class="callout-icon">⭐</span><div><strong>Bonusoppgaver Dag 2 (frivillig)</strong></div></div>
+      <div class="table-wrap" style="margin-top:8px"><table><tbody>
+        <tr><td><strong>2.F – Subnetting: 4 subnett av 192.168.50.0/24</strong></td><td><em>(Tabell med subnettmaske, nettverksadr., første/siste, broadcast)</em></td></tr>
+        <tr><td><strong>2.G – Skjermbilde av tracert/traceroute google.com</strong></td><td><em>(Lim inn skjermbilde)</em></td></tr>
+        <tr><td><strong>2.G – Antall hopp og IP til første hopp (gateway)</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>2.G – Hva skjer med responstid (ms) desto lenger unna?</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>2.H – IP i Bridged-modus vs. NAT-modus</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>2.H – Hva er viktigste forskjell mellom NAT og Bridged?</strong></td><td><em>(Svar)</em></td></tr>
+      </tbody></table></div>
+
+      <p style="color:var(--text-dim);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin:20px 0 8px">Sjekkliste Dag 2</p>
+      <ul class="checklist">
+        <li><span class="check-box"></span> Jeg kan forklare de tre nettverksmodiene i VMware (NAT, Bridged, Host-only)</li>
+        <li><span class="check-box"></span> Jeg vet hva en IP-adresse og subnettmaske er</li>
+        <li><span class="check-box"></span> Jeg har konfigurert NAT og testet internettilgang (2.1)</li>
+        <li><span class="check-box"></span> Jeg har satt opp host-only og kommunisert mellom to VM-er (2.2)</li>
+        <li><span class="check-box"></span> Jeg har satt en statisk IP-adresse (2.3)</li>
+      </ul>
 
       <div class="section-header" style="margin-top:44px"><h2>👥 Dag 3 – Brukeradministrasjon</h2><div class="section-line"></div></div>
       <div class="callout warning"><span class="callout-icon">📝</span><div><strong>Hva jeg lærte:</strong><br><em>(Skriv 3–5 setninger om brukeradministrasjon)</em></div></div>
       <div class="table-wrap" style="margin-top:16px"><table><tbody>
-        <tr><td><strong>3.1 – Skjermbilde av brukerlisten (Windows)</strong></td><td><em>(Lim inn)</em></td></tr>
+        <tr><td><strong>3.1 – Skjermbilde av brukerlisten (elev_anna, elev_bjorn, it_admin)</strong></td><td><em>(Lim inn)</em></td></tr>
         <tr><td><strong>3.1 – Hva skjer når elev_anna prøver å installere?</strong></td><td><em>(Svar)</em></td></tr>
         <tr><td><strong>3.1 – Skjermbilde av it_admin i Administrators-gruppen</strong></td><td><em>(Lim inn)</em></td></tr>
-        <tr><td><strong>3.2 – PowerShell-output (kopier terminaltekst)</strong></td><td><em>(Lim inn output)</em></td></tr>
-        <tr><td><strong>3.2 – Hva gjør net user?</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>3.2 – PowerShell-output fra alle 6 kommandoene</strong></td><td><em>(Lim inn terminaltekst)</em></td></tr>
+        <tr><td><strong>3.2 – Hva gjør net user og hva brukes det til?</strong></td><td><em>(Svar)</em></td></tr>
         <tr><td><strong>3.3 – Hva inneholder /etc/passwd?</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>3.3 – Skjermbilde av groups-kommandoen for praksis_elev</strong></td><td><em>(Lim inn)</em></td></tr>
       </tbody></table></div>
 
       <div class="section-header" style="margin-top:32px"><h2>🗂 Oppgave 3.4 – Delt mappe</h2><div class="section-line"></div></div>
@@ -101,6 +133,29 @@
         <tr><td><strong>AD – Skjermbilde av GRP-Elever-VG1 med medlemmer</strong></td><td><em>(Lim inn)</em></td></tr>
         <tr><td><strong>AD – Skjermbilde av NTFS-rettigheter på Elever-mappe</strong></td><td><em>(Lim inn)</em></td></tr>
       </tbody></table></div>
+
+      <div class="callout info" style="margin-top:12px"><span class="callout-icon">⭐</span><div><strong>Bonusoppgaver Dag 3 (frivillig)</strong></div></div>
+      <div class="table-wrap" style="margin-top:8px"><table><tbody>
+        <tr><td><strong>3.F – Sammenligning: ADUC vs. Entra ID (likt/ulikt)</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>3.G – Skjermbilde av passordpolicy i secpol.msc</strong></td><td><em>(Lim inn)</em></td></tr>
+        <tr><td><strong>3.G – Hva skjedde da du prøvde å sette passordet «abc»?</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>3.G – Hva er password complexity requirements i Windows?</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>3.H – Skjermbilde av Event ID 4624 for elev_anna</strong></td><td><em>(Lim inn)</em></td></tr>
+        <tr><td><strong>3.H – Hva viser Event ID 4624 og 4625?</strong></td><td><em>(Svar)</em></td></tr>
+        <tr><td><strong>3.H – Hvorfor er revisjonslogg viktig i en bedrift?</strong></td><td><em>(Svar)</em></td></tr>
+      </tbody></table></div>
+
+      <p style="color:var(--text-dim);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin:20px 0 8px">Sjekkliste Dag 3</p>
+      <ul class="checklist">
+        <li><span class="check-box"></span> Jeg kan forklare hvorfor brukeradministrasjon er viktig</li>
+        <li><span class="check-box"></span> Jeg har opprettet lokale brukere i Windows via GUI (3.1)</li>
+        <li><span class="check-box"></span> Jeg har administrert brukere via PowerShell (3.2)</li>
+        <li><span class="check-box"></span> Jeg har opprettet bruker i Ubuntu via terminalen (3.3)</li>
+        <li><span class="check-box"></span> Jeg har satt NTFS-rettigheter på en delt mappe (3.4)</li>
+        <li><span class="check-box"></span> Jeg har jobbet med Active Directory på DC01 (AD-guide)</li>
+        <li><span class="check-box"></span> Jeg forstår hva sudo gjør</li>
+        <li><span class="check-box"></span> Jeg har fullført refleksjonsoppgaven</li>
+      </ul>
 
       <div class="section-header" style="margin-top:44px"><h2>💬 Avsluttende refleksjon</h2><div class="section-line"></div></div>
       <ol class="steps">

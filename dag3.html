@@ -33,8 +33,8 @@
       <h1>Brukeradministrasjon</h1>
       <p class="lead">Lokale brukere i Windows og Ubuntu, least privilege, PowerShell, og Active Directory på Windows Server.</p>
       <div class="hero-meta">
-        <div class="hero-meta-item">⚠️ <strong>Klasse A:</strong> Økt 2 = Skolehelsetjenesten</div>
-        <div class="hero-meta-item">📌 <strong>Begge:</strong> Økt 1 = opphent 2.2+2.3 først</div>
+        <div class="hero-meta-item">⚠️ <strong>Klasse A:</strong> Økt 2 = Skolehelsetjenesten – fullfør hjemme</div>
+        <div class="hero-meta-item">📌 <strong>Klasse B:</strong> Økt 1 = opphent 2.2+2.3 først</div>
       </div>
     </header>
     <div class="content-area">
@@ -135,7 +135,23 @@ su - &lt;brukernavn&gt;                  <span class="cm"># Bytt til bruker</spa
 
       <div class="callout success"><span class="callout-icon">🟢</span><div><strong>Oppgave 3.1 – Lokale brukere i Windows (GUI)</strong><br>Åpne Datamaskinbehandling → Lokale brukere og grupper → Brukere. Opprett: <code>elev_anna</code> (standard), <code>elev_bjorn</code> (standard), <code>it_admin</code> (legg til i Administrators). Passord: <code>Passord123!</code>. Logg inn som <code>elev_anna</code> og observer begrenset tilgang.</div></div>
 
+      <div class="callout info" style="margin-top:8px">
+        <span class="callout-icon">💡</span>
+        <div>
+          <strong>Åpne Datamaskinbehandling raskt:</strong> Trykk <kbd>Win</kbd> + <kbd>R</kbd>, skriv <code>compmgmt.msc</code> og trykk Enter.<br><br>
+          <strong>Logg inn som en annen bruker:</strong> Klikk Start → profilikon → «Bytt bruker» (Switch account). Du trenger ikke logge ut – du kan bytte mellom brukere.<br><br>
+          <strong>elev_anna klarer ikke installere?</strong> Det er meningen! Standardbrukere får UAC-dialog der de må oppgi administratorpassord. Dette er <em>Principle of Least Privilege</em> i praksis.
+        </div>
+      </div>
+
       <div class="callout success" style="margin-top:16px"><span class="callout-icon">🟢</span><div><strong>Oppgave 3.2 – PowerShell-brukeradministrasjon</strong></div></div>
+
+      <div class="callout warning" style="margin-top:8px">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Kjør PowerShell som administrator!</strong><br>
+        Kommandoene under krever administratorrettigheter. Høyreklikk på PowerShell i Start-menyen og velg <strong>«Kjør som administrator»</strong> (Run as administrator). Ser du en UAC-dialog? Det er Windows som bekrefter at du vet hva du gjør – klikk Ja.</div>
+      </div>
+
       <div class="code-block" style="margin-top:12px">
         <div class="code-header"><span class="code-lang">PowerShell (Kjør som administrator)</span><button class="copy-btn">Kopier</button></div>
         <pre><span class="kw">net</span> user                                    <span class="cm"># 1. Vis alle brukere</span>
@@ -184,6 +200,54 @@ exit                                       <span class="cm"># 8. Gå tilbake</sp
         <a href="https://mslabs.cloudguides.com/guides/AZ-104%20Exam%20Guide%20-%20Microsoft%20Azure%20Administrator%20Exercise%201" target="_blank" rel="noopener noreferrer" style="color:var(--teal);font-weight:600">→ Interaktiv simulering: Manage Entra ID Identities (Microsoft)</a><br><br>
         Etter simuleringen: Sammenlign det du gjorde i ADUC med det du så i Entra ID. Hva var likt? Hva var annerledes?
       </div></div>
+
+      <div class="section-header" style="margin-top:44px"><h2>⭐ Bonusoppgaver – Dag 3</h2><div class="section-line"></div></div>
+      <div class="callout info" style="margin-bottom:4px"><span class="callout-icon">ℹ️</span><div>Bonusoppgavene er frivillige og krever at du har gjort 3.1–3.4. De gir dypere forståelse av Windows-sikkerhet og revisjon.</div></div>
+
+      <div class="callout info" style="margin-top:12px">
+        <span class="callout-icon">🔵</span>
+        <div>
+          <strong>Bonusoppgave 3.G – Passordpolicy med Local Security Policy</strong><br>
+          Windows lar deg tvinge frem sterke passord via innebygde sikkerhetsregler – akkurat slik det gjøres i bedrifter og skoler.<br><br>
+          <ol style="margin:8px 0 0 16px;padding:0">
+            <li>Trykk <kbd>Win</kbd> + <kbd>R</kbd>, skriv <code>secpol.msc</code> og trykk Enter</li>
+            <li>Gå til <strong>Account Policies → Password Policy</strong></li>
+            <li>Sett <strong>Minimum password length</strong> til <code>10</code></li>
+            <li>Aktiver <strong>Password must meet complexity requirements</strong></li>
+            <li>Klikk OK og lukk vinduet</li>
+            <li>Prøv å sette passordet <code>abc</code> på <code>elev_anna</code> via PowerShell:<br><code>net user elev_anna abc</code> – hva skjer?</li>
+            <li>Sett i stedet et passord som oppfyller kravene, f.eks. <code>Skole2025!</code></li>
+          </ol>
+          <br>
+          <strong>Svar på:</strong>
+          <ul style="margin:4px 0 0 16px;padding:0">
+            <li>Hva er «password complexity requirements» i Windows?</li>
+            <li>Hvem bør bestemme passordpolicy i en organisasjon?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout info" style="margin-top:12px">
+        <span class="callout-icon">🔵</span>
+        <div>
+          <strong>Bonusoppgave 3.H – Event Viewer: finn hvem som logget inn</strong><br>
+          Windows logger alle innloggingsforsøk automatisk. I en virkelig jobb brukes dette til å oppdage uautorisert tilgang.<br><br>
+          <ol style="margin:8px 0 0 16px;padding:0">
+            <li>Trykk <kbd>Win</kbd> + <kbd>R</kbd>, skriv <code>eventvwr.msc</code> og trykk Enter</li>
+            <li>Gå til <strong>Windows Logs → Security</strong></li>
+            <li>Se etter hendelser med Event ID <strong>4624</strong> (vellykket innlogging) og <strong>4625</strong> (feilet innlogging)</li>
+            <li>Klikk på en 4624-hendelse og les detaljene: hvilken bruker logget inn, og når?</li>
+            <li>Logg inn og ut som <code>elev_anna</code>, gå tilbake til Event Viewer og finn hendelsen</li>
+          </ol>
+          <br>
+          <strong>Svar på:</strong>
+          <ul style="margin:4px 0 0 16px;padding:0">
+            <li>Hva viser Event ID 4624 og 4625?</li>
+            <li>Hvorfor er revisjonslogg (audit log) viktig i en bedrift?</li>
+            <li>Hva er skjermbildet av hendelsen du fant?</li>
+          </ul>
+        </div>
+      </div>
 
       <div class="section-header" style="margin-top:44px"><h2>📊 Avsluttende refleksjon</h2><div class="section-line"></div></div>
       <p style="color:var(--text-muted);font-size:14px;margin-bottom:16px">Skriv 5–10 setninger der du svarer på:</p>
