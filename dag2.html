@@ -213,7 +213,60 @@ ping -c 4 8.8.8.8</pre>
         </div>
       </div>
 
-      <div class="callout info" style="margin-top:20px"><span class="callout-icon">🔵</span><div><strong>Fordypningsoppgave 2.F – Subnetting</strong><br>Du har nettverket <code>192.168.50.0/24</code>. Del det i 4 like store subnett. For hvert subnett: hva er subnettmasken, nettverksadresse, første og siste brukbare adresse, og broadcast-adresse?</div></div>
+      <div class="section-header" style="margin-top:44px"><h2>⭐ Bonusoppgaver – Dag 2</h2><div class="section-line"></div></div>
+      <div class="callout info" style="margin-bottom:4px"><span class="callout-icon">ℹ️</span><div>Bonusoppgavene er frivillige og krever at du har gjort 2.1–2.3. De gir dypere forståelse og er bra å ha med i dokumentasjonen.</div></div>
+
+      <div class="callout info" style="margin-top:12px"><span class="callout-icon">🔵</span><div><strong>Fordypningsoppgave 2.F – Subnetting</strong><br>Du har nettverket <code>192.168.50.0/24</code>. Del det i 4 like store subnett. For hvert subnett: hva er subnettmasken, nettverksadresse, første og siste brukbare adresse, og broadcast-adresse?<br><em>Se oppslagsverk → Subnettmaske-tabell for hjelp.</em></div></div>
+
+      <div class="callout info" style="margin-top:12px">
+        <span class="callout-icon">🔵</span>
+        <div>
+          <strong>Bonusoppgave 2.G – Rutetrace: se pakkenes vei</strong><br>
+          Bruk <code>tracert</code> (Windows) eller <code>traceroute</code> (Ubuntu) for å se hvilke rutere pakkene passerer på vei til internett.<br><br>
+          <div class="tab-group" style="margin-top:8px">
+            <div class="tab-bar">
+              <button class="tab-btn active" data-tab="win2g">Windows</button>
+              <button class="tab-btn" data-tab="ubu2g">Ubuntu</button>
+            </div>
+            <div class="tab-content active" data-tab-content="win2g">
+              <div class="code-block" style="margin:8px 0 0">
+                <div class="code-header"><span class="code-lang">CMD / PowerShell</span><button class="copy-btn">Kopier</button></div>
+                <pre>tracert google.com</pre>
+              </div>
+            </div>
+            <div class="tab-content" data-tab-content="ubu2g">
+              <div class="code-block" style="margin:8px 0 0">
+                <div class="code-header"><span class="code-lang">Bash</span><button class="copy-btn">Kopier</button></div>
+                <pre>traceroute google.com</pre>
+              </div>
+            </div>
+          </div>
+          <strong>Svar på:</strong>
+          <ul style="margin:8px 0 0 16px;padding:0">
+            <li>Hvor mange hopp (hops) er det til google.com?</li>
+            <li>Hva er IP-adressen til det første hoppet? (Det er din gateway/ruter)</li>
+            <li>Hva skjer med responstiden (ms) desto lenger unna du kommer?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout info" style="margin-top:12px">
+        <span class="callout-icon">🔵</span>
+        <div>
+          <strong>Bonusoppgave 2.H – Bridged adapter: VM på det ekte nettverket</strong><br>
+          Bytt nettverksmodus til <strong>Bridged</strong> og se hva som endrer seg.<br><br>
+          <ol style="margin:8px 0 0 16px;padding:0">
+            <li>Gå til VM Settings → Network Adapter → sett til <strong>Bridged</strong></li>
+            <li>Restart nettverksadapteren i VM-en (eller restart VM-en)</li>
+            <li>Kjør <code>ipconfig</code> (Windows) / <code>ip addr</code> (Ubuntu) – noter den nye IP-adressen</li>
+            <li>Sammenlign: Er VM-ens IP nå i samme subnett som vertsmaskinens IP?</li>
+            <li>Prøv å pinge vertsmaskinens IP fra VM-en</li>
+            <li>Bytt tilbake til <strong>NAT</strong> når du er ferdig</li>
+          </ol>
+          <br>
+          <strong>Svar på:</strong> Hva er den viktigste forskjellen mellom NAT og Bridged, basert på det du observerte?
+        </div>
+      </div>
 
       <div class="section-header" style="margin-top:44px"><h2>✅ Sjekkliste Dag 2</h2><div class="section-line"></div></div>
       <ul class="checklist">
